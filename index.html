@@ -2,13 +2,1018 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>notepad</title>
-<meta http-equiv="refresh" content="0; url=https://claude.ai/artifact/NdUVfRZSLu8kr26t5z3p9E">
-<script>location.replace("https://claude.ai/artifact/NdUVfRZSLu8kr26t5z3p9E");</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="favicon.ico?v=2" sizes="any">
+<link rel="icon" type="image/png" href="favicon-32.png?v=2">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+<title>Jenny Fant · Content &amp; model design</title>
+<meta name="description" content="Jenny Fant is a content and model designer in San Francisco.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+@font-face{font-family:'Jenny Fant Hand';src:url('JennyFantHand-Regular.woff2') format('woff2');font-display:swap}
+:root{
+  --ground:#1B1A18; --ground-lo:#141311; --ink:#ECE6D8; --muted:#958E7F; --rule:rgba(236,230,216,.16);
+  --olive:#C5D1B2; --red:#A2372B;
+  --label:'DM Mono',ui-monospace,Menlo,monospace;
+  --type:'Courier Prime','Courier New',monospace;
+  /* machine color: sage by default */
+  --body:#A7B8AA; --body-hi:#C6D3C7; --body-lo:#7C8E80; --body-edge:#5F6F63;
+  color-scheme:dark;
+}
+body.oxblood{--body:#6F2229;--body-hi:#8E343C;--body-lo:#4B151A;--body-edge:#330C10}
+body.cream{--body:#D8D2B4;--body-hi:#EDE8D0;--body-lo:#B4AD8E;--body-edge:#8F896D}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--label);overflow:hidden;
+  background-image:radial-gradient(ellipse 60% 55% at 50% 62%,rgba(255,236,200,.07),transparent 70%)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--olive);outline-offset:3px}
+.caps{text-transform:uppercase;letter-spacing:.14em}
+
+/* ---------- Nav ---------- */
+.nav{height:52px;display:flex;align-items:center;gap:24px;padding:0 var(--pad);border-bottom:1px solid var(--rule)}
+.nav .brand{background:none;border:0;padding:0;cursor:pointer;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;white-space:nowrap}
+.nav .links{display:flex;gap:clamp(16px,2.2vw,32px);margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav .links::-webkit-scrollbar{display:none}
+.nav .links{align-items:center}
+.nav .links a.navlink{display:inline-flex;align-items:center;text-decoration:none;color:var(--ink);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;padding:3px 0}
+.nav .links a.navlink:hover{color:var(--olive)}
+.nav .links button{background:none;border:0;padding:3px 0;cursor:pointer;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;color:var(--ink)}
+.nav .links button:hover{color:var(--olive)}
+.nav .links .hire{border-bottom:1px solid var(--ink)}
+
+/* ---------- Stage: machine in the middle, four quiet corners ---------- */
+:root{--pad:clamp(20px,2.6vw,40px);--side:210px}
+.stage{height:calc(100dvh - 52px);display:grid;grid-template-columns:var(--side) 1fr var(--side);column-gap:var(--pad);padding:0 var(--pad);align-items:end}
+.side{align-self:stretch;display:flex;flex-direction:column;justify-content:space-between;padding:28px 0 32px;min-width:0}
+.blk{border-top:1px solid var(--rule);padding-top:10px}
+.lbl{display:block;margin:0 0 10px;font-size:10px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.who{margin:0;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;line-height:1.75}
+.who span{display:block;color:var(--muted);font-weight:400}
+.meta{display:grid;grid-template-columns:62px 1fr;column-gap:12px;row-gap:5px;margin:0;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;line-height:1.5}
+.meta dt{color:var(--muted)}
+.meta dd{margin:0}
+.right{text-align:left}
+.asks{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.asks button{background:none;border:0;padding:0;cursor:pointer;text-align:left;font-family:var(--type);font-size:13px;line-height:1.4;color:var(--ink);text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px;transition:text-decoration-color .15s}
+.asks button:hover{text-decoration-color:var(--ink)}
+.ideas{position:relative}
+.pop .asks button{color:#1C1B18}
+.pop .asks button:hover{text-decoration-color:#1C1B18}
+.pop{position:absolute;top:calc(100% + 10px);right:0;width:250px;padding:14px 16px;background:#FBF9F3;box-shadow:0 0 0 1px rgba(0,0,0,.06),0 14px 30px -12px rgba(40,34,24,.35);z-index:10}
+.prefs{display:grid;gap:14px;margin-top:auto}
+.pref{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.pref .lbl{margin:0}
+.swatches{display:flex;gap:8px;align-items:center}
+.swatches button{width:14px;height:14px;border-radius:50%;border:0;padding:0;cursor:pointer;box-shadow:inset 0 -2px 3px rgba(0,0,0,.25),0 0 0 1px rgba(0,0,0,.15)}
+.swatches button[aria-pressed="true"]{box-shadow:inset 0 -2px 3px rgba(0,0,0,.25),0 0 0 2px var(--ground),0 0 0 3px var(--ink)}
+.textbtn{background:none;border:0;padding:0;cursor:pointer;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink)}
+.textbtn:hover{color:var(--olive)}
+.note{margin:0;font-family:var(--type);font-size:12px;line-height:1.55;color:var(--muted)}
+.center{align-self:end;display:flex;justify-content:center;min-width:0}
+
+/* =========================================================
+   THE TYPEWRITER — every size in u
+   ========================================================= */
+.machine{--u:44px;width:calc(var(--u)*15.8);position:relative;display:flex;flex-direction:column;align-items:center;padding-bottom:calc(var(--u)*.6)}
+
+/* paper + carriage */
+.top{position:relative;width:100%;height:calc(var(--paperH) + var(--u)*1.1)}
+.platen{position:absolute;left:calc(var(--u)*1.1);right:calc(var(--u)*1.1);bottom:calc(var(--u)*.05);height:calc(var(--u)*.95);border-radius:calc(var(--u)*.46);
+  background:linear-gradient(180deg,#3C3C3A 0%,#121211 40%,#1E1E1C 62%,#050505 100%);box-shadow:0 calc(var(--u)*.1) calc(var(--u)*.2) rgba(0,0,0,.4)}
+.knob{position:absolute;bottom:calc(var(--u)*-.05);width:calc(var(--u)*1.05);height:calc(var(--u)*1.15);border-radius:calc(var(--u)*.3);
+  background:repeating-linear-gradient(90deg,rgba(0,0,0,.14) 0 2px,rgba(255,255,255,.08) 2px 5px),linear-gradient(180deg,#F1ECDC,#D2CAB2 60%,#A9A189);
+  box-shadow:inset 0 -3px 5px rgba(0,0,0,.25),0 4px 8px rgba(0,0,0,.3)}
+.knob.l{left:calc(var(--u)*.1)}.knob.r{right:calc(var(--u)*.1)}
+.lever{position:absolute;left:calc(var(--u)*-.4);bottom:calc(var(--u)*.55);width:calc(var(--u)*1.6);height:calc(var(--u)*.14);border-radius:99px;transform:rotate(-24deg);
+  background:linear-gradient(180deg,#F7F8F8,#9FA5A9 50%,#DDE1E3);box-shadow:0 2px 3px rgba(0,0,0,.35)}
+.paper{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(var(--u)*.35);width:calc(var(--u)*10.6);height:var(--paperH);
+  background:linear-gradient(90deg,rgba(0,0,0,.035),transparent 6%,transparent 94%,rgba(0,0,0,.035)),linear-gradient(180deg,#FBF9F3,#F3EFE4);
+  box-shadow:0 0 0 1px rgba(0,0,0,.04),calc(var(--u)*.1) 0 calc(var(--u)*.3) rgba(0,0,0,.08),calc(var(--u)*-.1) 0 calc(var(--u)*.3) rgba(0,0,0,.08);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 calc(var(--u)*1.2));mask-image:linear-gradient(180deg,transparent 0,#000 calc(var(--u)*1.2))}
+.sheet{height:100%;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;padding:calc(var(--u)*.7) calc(var(--u)*.85) calc(var(--u)*1.05)}
+.sheet::-webkit-scrollbar{display:none}
+.sheet::before{content:"";margin-top:auto}
+.typed{font-family:var(--type);font-size:max(12px,calc(var(--u)*.32));line-height:1.6;color:#1C1B18;white-space:pre-wrap;word-wrap:break-word;
+  text-shadow:0 0 .6px rgba(20,19,16,.75),.25px .15px 0 rgba(20,19,16,.25)}
+.typed p{margin:0 0 .8em}
+.typed .q{color:var(--red);text-shadow:0 0 .6px rgba(162,55,43,.7)}
+.typed .ex{display:block;padding-left:1.5ch}
+.typed .lnk{text-align:left;background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-shadow:inherit}
+.typed .lnk:hover{color:#4F5A2C}
+.line{display:flex;align-items:baseline;gap:.2ch}
+.line span{color:var(--red)}
+.composer{flex:1;min-width:0;border:0;background:transparent;outline:none;padding:0;font-family:var(--type);font-size:max(12px,calc(var(--u)*.32));color:var(--red);caret-color:var(--red);text-shadow:0 0 .6px rgba(162,55,43,.7)}
+.composer::placeholder{color:#1C1B18;opacity:.3;text-shadow:none}
+.bail{position:absolute;left:calc(var(--u)*2);right:calc(var(--u)*2);bottom:calc(var(--u)*.72);height:calc(var(--u)*.09);border-radius:99px;
+  background:linear-gradient(180deg,#FFFFFF,#A3A9AD 55%,#6D7377);box-shadow:0 2px 3px rgba(0,0,0,.3)}
+.bail i{position:absolute;top:calc(var(--u)*-.09);width:calc(var(--u)*.55);height:calc(var(--u)*.26);border-radius:4px;background:linear-gradient(180deg,#D9DDDF,#8A9094);box-shadow:0 1px 2px rgba(0,0,0,.35)}
+.bail i:first-child{left:22%}.bail i:last-child{right:22%}
+
+/* housing */
+.housing{position:relative;z-index:3;margin-top:calc(var(--u)*-.35);width:calc(var(--u)*14.4);height:calc(var(--u)*1.9);border-radius:calc(var(--u)*1.1) calc(var(--u)*1.1) calc(var(--u)*.2) calc(var(--u)*.2);
+  background:radial-gradient(ellipse 60% 70% at 50% 0%,var(--body-hi),transparent 70%),linear-gradient(180deg,var(--body) 0%,var(--body-lo) 100%);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.35),inset 0 -2px 6px rgba(0,0,0,.18)}
+.basket{position:absolute;left:50%;bottom:calc(var(--u)*.3);transform:translateX(-50%);width:calc(var(--u)*5.2);height:calc(var(--u)*1.25);border-radius:50% 50% calc(var(--u)*.3) calc(var(--u)*.3)/100% 100% calc(var(--u)*.3) calc(var(--u)*.3);
+  background:radial-gradient(ellipse 30% 55% at 50% 100%,#0B0B0A 50%,transparent 52%),repeating-conic-gradient(from -90deg at 50% 100%,#C6CACC 0deg 1.1deg,#1A1A19 1.1deg 5deg),#111;
+  box-shadow:inset 0 calc(var(--u)*.12) calc(var(--u)*.2) rgba(0,0,0,.85),0 1px 0 rgba(255,255,255,.3)}
+.guide{position:absolute;left:50%;top:calc(var(--u)*-.2);transform:translateX(-50%);width:calc(var(--u)*.7);height:calc(var(--u)*.5);border-radius:3px 3px 6px 6px;background:linear-gradient(180deg,#EEF0F1,#8C9296);box-shadow:0 2px 3px rgba(0,0,0,.4)}
+.bar{position:absolute;left:50%;bottom:0;width:calc(var(--u)*.06);height:calc(var(--u)*1.15);background:linear-gradient(90deg,#8E9498,#F1F3F4,#8E9498);transform-origin:50% 100%;transform:translateX(-50%) rotate(-80deg);opacity:0}
+.bar.strike{animation:strike .12s ease-out}
+@keyframes strike{0%{opacity:1;transform:translateX(-50%) rotate(-80deg)}55%{opacity:1;transform:translateX(-50%) rotate(0deg)}100%{opacity:0;transform:translateX(-50%) rotate(-80deg)}}
+.vent{position:absolute;top:calc(var(--u)*.55);width:calc(var(--u)*3.2);height:calc(var(--u)*.08);border-radius:99px;background:rgba(0,0,0,.18);box-shadow:0 calc(var(--u)*.18) 0 rgba(0,0,0,.18),0 calc(var(--u)*.36) 0 rgba(0,0,0,.18)}
+.vent.l{left:calc(var(--u)*1.3)}.vent.r{right:calc(var(--u)*1.3)}
+
+/* front + keyboard */
+.front{position:relative;z-index:2;width:calc(var(--u)*15.6);padding:calc(var(--u)*.35) calc(var(--u)*.55) calc(var(--u)*.55);border-radius:calc(var(--u)*.3) calc(var(--u)*.3) calc(var(--u)*.7) calc(var(--u)*.7);
+  background:linear-gradient(180deg,var(--body-hi) 0%,var(--body) 18%,var(--body-lo) 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -4px 10px rgba(0,0,0,.2),0 calc(var(--u)*.15) 0 var(--body-edge)}
+.front::after{content:"";position:absolute;left:4%;right:4%;bottom:calc(var(--u)*-.75);height:calc(var(--u)*.7);border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.7),transparent);z-index:-1}
+.badge{display:flex;justify-content:center;align-items:baseline;gap:calc(var(--u)*.2);margin-bottom:calc(var(--u)*.3)}
+.badge b{font-family:var(--label);font-weight:500;font-size:calc(var(--u)*.34);letter-spacing:.34em;color:transparent;background:linear-gradient(180deg,#FFFFFF,#9EA4A8 55%,#E5E8EA);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 1px 0 rgba(0,0,0,.35))}
+.badge small{font-family:var(--label);font-size:calc(var(--u)*.17);letter-spacing:.2em;color:var(--red);text-transform:uppercase;filter:drop-shadow(0 1px 0 rgba(255,255,255,.3))}
+.deck{padding:calc(var(--u)*.22) calc(var(--u)*.2) calc(var(--u)*.26);border-radius:calc(var(--u)*.22);background:linear-gradient(180deg,#0E0E0D,#1B1B1A);box-shadow:inset 0 calc(var(--u)*.08) calc(var(--u)*.16) rgba(0,0,0,.9),0 1px 0 rgba(255,255,255,.25);
+  display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*.14);user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.row{display:flex;gap:calc(var(--u)*.14)}
+.row.fn{align-self:stretch;justify-content:space-between;padding:0 calc(var(--u)*.1)}
+.row.fn .grp{display:flex;gap:calc(var(--u)*.14)}
+.key{--w:1;position:relative;width:calc(var(--u)*.86*var(--w) + var(--u)*.14*(var(--w) - 1));height:calc(var(--u)*.86);border:0;padding:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.key:focus{outline:none}
+.cap{position:absolute;inset:calc(var(--u)*.03) calc(var(--u)*.03) calc(var(--u)*.1);border-radius:calc(var(--u)*.26);
+  background:radial-gradient(ellipse 80% 70% at 50% 28%,#FFFCF3 0%,#F0E9D7 50%,#D8CFB6 100%);
+  box-shadow:0 calc(var(--u)*.07) 0 #9D957D,0 calc(var(--u)*.12) calc(var(--u)*.1) rgba(0,0,0,.75),inset 0 calc(var(--u)*-.03) calc(var(--u)*.04) rgba(90,80,55,.25);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;line-height:1;transition:transform .06s ease-out,box-shadow .06s ease-out}
+.cap .g{font-family:var(--label);font-weight:500;font-size:calc(var(--u)*.25);color:#2A2824}
+.cap .g small{display:block;font-size:.66em;opacity:.6;margin-bottom:1px}
+.key.mod .cap .g{font-size:calc(var(--u)*.13);letter-spacing:.12em;text-transform:uppercase;text-align:center;line-height:1.25}
+.key.round .cap{border-radius:50%}
+.key.emo .cap .g{font-family:system-ui,'Apple Color Emoji','Segoe UI Emoji',sans-serif;font-size:calc(var(--u)*.3);font-weight:400}
+.key.pressed .cap,.key:active .cap{transform:translateY(calc(var(--u)*.06));box-shadow:0 calc(var(--u)*.015) 0 #9D957D,0 calc(var(--u)*.04) calc(var(--u)*.05) rgba(0,0,0,.8),inset 0 calc(var(--u)*-.02) calc(var(--u)*.03) rgba(90,80,55,.25)}
+.key.on .cap{background:radial-gradient(ellipse 80% 70% at 50% 28%,#F6E9DD 0%,#E8D2C0 60%,#CDB39C 100%)}
+.key .tip{position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);background:var(--ink);color:var(--ground);font-family:var(--label);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;border-radius:3px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .12s;z-index:5}
+.key:hover .tip{opacity:1}
+.key.space{height:calc(var(--u)*.62);margin-top:calc(var(--u)*.02)}
+.key.space .cap{border-radius:calc(var(--u)*.2)}
+.row.fnrow-label{font-size:calc(var(--u)*.12)}
+
+/* ---------- Panels ---------- */
+.scrim{position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;padding:24px 16px;background:rgba(10,9,8,.6)}
+.panel{position:relative;width:min(600px,100%);max-height:calc(100dvh - 48px);overflow-y:auto;padding:44px 48px 40px;background:linear-gradient(180deg,#FBF9F3,#F2EEE3);box-shadow:0 30px 60px -20px rgba(0,0,0,.45);
+  font-family:var(--type);font-size:16px;line-height:1.65;color:#1C1B18}
+@media (prefers-reduced-motion:no-preference){.panel{animation:feed .4s cubic-bezier(.2,.8,.2,1)}}
+@keyframes feed{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+.panel h2{font-family:var(--label);font-weight:500;font-size:13px;letter-spacing:.2em;text-transform:uppercase;margin:0 0 18px}
+.panel p{margin:0 0 14px}
+.panel ul{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:12px}
+.panel li b{display:block;font-family:var(--label);font-weight:500;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.panel .x{position:absolute;top:14px;right:16px;background:none;border:0;cursor:pointer;font-family:var(--label);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.panel .acts{display:flex;flex-wrap:wrap;gap:18px;margin-top:20px;align-items:center}
+.panel .btn{font-family:var(--label);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#1C1B18;background:none;border:0;border-bottom:1px solid #1C1B18;padding:2px 0;cursor:pointer;text-decoration:none}
+.panel.rs{width:min(820px,100%);padding:40px 28px 28px}.panel.wide{width:min(980px,100%);padding:40px 28px 28px}.deckwrap{position:relative;aspect-ratio:16/9;margin-top:6px;background:#1b1b1b;border:1px solid rgba(0,0,0,.1)}.deckctl{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:12px}.deckctl button{width:40px;height:40px;border-radius:50%;border:1px solid currentColor;background:none;color:inherit;font:inherit;font-size:18px;line-height:1;cursor:pointer;opacity:.85}.deckctl button:hover{opacity:1}.deckctl button:disabled{opacity:.3;cursor:default}.deck-n{min-width:64px;text-align:center;font-size:.9em;opacity:.75;font-variant-numeric:tabular-nums}.deckhint{margin:10px 0 0;font-size:.85em;opacity:.7}.deckwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.panel .rs-img{display:block;width:100%;height:auto;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.18)}.panel .rs-acts{margin-top:0}
+.panel .soon{font-style:italic;color:#77705F}
+.email{user-select:all;font-weight:700}
+
+/* ---------- Narrow screens ---------- */
+/* ---------- Name = world switch ---------- */
+:root{--hand:'Jenny Fant Hand','Bradley Hand','Segoe Print',cursive;--nudge:#E9C9A2}
+.nav .brand{display:inline-flex;align-items:center;border:1px solid var(--ink);padding:6px 12px;position:relative;transition:background .15s,color .15s}
+.nav .brand:hover{background:var(--ink);color:var(--ground)}
+.nav .brand .spin{display:inline-block;font-size:13px;letter-spacing:0;transition:transform .5s cubic-bezier(.3,.7,.3,1)}
+.nav .brand.turn .spin{transform:rotate(360deg)}
+.nav .brand::after{content:attr(data-tip);position:absolute;left:0;top:calc(100% + 8px);white-space:nowrap;background:var(--ink);color:var(--ground);font-size:10px;letter-spacing:.14em;padding:6px 9px;opacity:0;pointer-events:none;transition:opacity .15s;z-index:20}
+.nav .brand:hover::after,.nav .brand:focus-visible::after{opacity:1}
+.nudge{position:fixed;left:calc(var(--pad) + 128px);top:38px;z-index:25;display:flex;align-items:flex-start;gap:4px;color:var(--nudge);pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .5s,transform .5s}
+.nudge.show{opacity:1;transform:none}
+.nudge svg{width:28px;height:21px;flex:none;margin-top:-3px}
+.nudge span{font-family:var(--hand);font-size:15px;line-height:1;white-space:nowrap;margin-top:9px}
+.stage{transition:opacity .28s ease}
+.stage.swapping{opacity:0}
+.nb-only,.lp-only{display:none}
+body.w-nb .nb-only,body.w-lp .lp-only{display:revert}
+body.w-nb .tw-only,body.w-lp .tw-only{display:none}
+
+/* =========================================================
+   NOTEBOOK WORLD — watercolor desk, a real notebook, serif type
+   ========================================================= */
+body.w-nb{--ground:#F4EFE4;--ink:#2F2A25;--muted:#7A7064;--rule:rgba(47,42,37,.16);--olive:#8C3F2A;--nudge:#8C3F2A;--serif:'Newsreader',Georgia,'Times New Roman',serif;color-scheme:light;
+  background:#F4EFE4 url('watercolor.jpg') center/cover no-repeat}
+body.w-nb .nav{border-bottom-color:transparent}
+body.w-nb .nav .brand{font-family:var(--hand);font-size:22px;font-weight:400;letter-spacing:0;text-transform:none;border:0;padding:0;background:none}
+body.w-nb .about,body.w-nb .prefs{visibility:hidden}
+body.w-nb .nav .brand:hover{background:none;color:#9A4A2E}
+body.w-nb .nav .brand::after{font-family:var(--serif);font-style:italic;font-size:13px;letter-spacing:0;text-transform:none}
+body.w-nb .nav .links button,body.w-nb .nav .links a.navlink{font-family:var(--hand);font-size:18px;letter-spacing:0;text-transform:none;color:var(--ink)}
+body.w-nb .nav .links .hire{border-bottom-color:rgba(47,42,37,.6)}
+body.w-nb .lbl{font-family:var(--hand);font-style:normal;font-size:17px;line-height:1;letter-spacing:0;text-transform:none;color:var(--rust,#8C3F2A);margin:0 0 8px;display:block}
+body.w-nb .blk{border-top:1px solid rgba(47,42,37,.2);padding-top:10px;background:none}
+body.w-nb .meta dt{font-family:var(--hand);font-style:normal;font-size:15px;line-height:1.2;color:var(--muted)}
+body.w-nb .pref .lbl{margin:0}
+body.w-nb .note{font-family:var(--serif);font-size:13px;line-height:1.5;color:var(--ink)}
+body.w-nb .note.nb-only{color:var(--muted);font-size:12.5px}
+body.w-nb .meta{font-family:var(--serif);font-size:13px;letter-spacing:0;text-transform:none;grid-template-columns:58px 1fr;row-gap:5px;line-height:1.4;align-items:baseline}
+body.w-nb .meta dt{font-style:italic}
+body.w-nb .panel{font-family:var(--serif);font-size:17px}
+body.w-nb .panel h2{font-family:var(--serif);font-size:26px;font-weight:500;letter-spacing:0;text-transform:none}
+body.w-nb .panel li b{font-family:var(--serif);font-size:17px;font-weight:500;letter-spacing:0;text-transform:none}
+body.w-nb .panel .btn,body.w-nb .panel .x{font-family:var(--serif);font-size:15px;letter-spacing:0;text-transform:none}
+body.w-nb .scrim{background:rgba(60,50,40,.28);backdrop-filter:blur(3px)}
+body.w-nb .machine{display:none}
+.notebook{display:none}
+body.w-nb .center{align-self:center}
+body.w-nb .notebook{display:block}
+.notebook{--nbw:900px;--ink2:#26324A;--rust:#8C3F2A;position:relative;width:var(--nbw);height:calc(var(--nbw)/1.5);margin:10px 0 28px;transform:rotate(-.8deg)}
+/* soft, layered contact shadow on the desk */
+.notebook::before{content:"";position:absolute;inset:2% -1% -3% -1%;border-radius:14px;background:rgba(70,55,35,.28);filter:blur(22px);transform:translateY(18px);z-index:-1}
+.nb-cover{position:absolute;inset:-12px -14px -14px;border-radius:10px 12px 12px 10px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.06) 0 1px,transparent 1px 2px),
+    repeating-linear-gradient(90deg,rgba(0,0,0,.07) 0 1px,transparent 1px 2px),
+    linear-gradient(135deg,#7D8868,#5E6A4C);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 -2px 3px rgba(0,0,0,.25),0 3px 0 #4A5538,0 4px 1px rgba(0,0,0,.25),0 10px 18px -6px rgba(50,38,20,.45)}
+.nb-spread{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr}
+/* page block: stacked edges under each page */
+.nb-page{position:relative;z-index:1;padding:calc(var(--nbw)*.055) calc(var(--nbw)*.06) calc(var(--nbw)*.05);display:flex;flex-direction:column;min-height:0;background-color:#FBF8F0}
+.nb-page::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;opacity:.55;mix-blend-mode:multiply;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .4 0 0 0 0 .3 0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.nb-page.l{border-radius:3px 0 0 4px;
+  background-image:
+    radial-gradient(ellipse 70% 90% at 22% 45%,rgba(255,255,255,.45),rgba(255,255,255,0) 70%),
+    linear-gradient(180deg,rgba(90,70,40,.05) 0,rgba(0,0,0,0) 6%,rgba(0,0,0,0) 94%,rgba(90,70,40,.06) 100%),
+    linear-gradient(90deg,rgba(90,70,40,.06) 0,rgba(0,0,0,0) 7%,rgba(0,0,0,0) 58%,rgba(90,70,40,.08) 78%,rgba(70,52,26,.2) 92%,rgba(50,36,16,.34) 100%)}
+.nb-page.r{border-radius:0 3px 4px 0;
+  background-image:
+    radial-gradient(ellipse 70% 90% at 78% 45%,rgba(255,255,255,.45),rgba(255,255,255,0) 70%),
+    linear-gradient(180deg,rgba(90,70,40,.05) 0,rgba(0,0,0,0) 6%,rgba(0,0,0,0) 94%,rgba(90,70,40,.06) 100%),
+    linear-gradient(270deg,rgba(90,70,40,.06) 0,rgba(0,0,0,0) 7%,rgba(0,0,0,0) 58%,rgba(90,70,40,.08) 78%,rgba(70,52,26,.2) 92%,rgba(50,36,16,.34) 100%)}
+/* page-block edges: many thin sheets visible along the outer sides and bottom */
+.nb-page::after{content:"";position:absolute;top:3px;bottom:-6px;width:7px;pointer-events:none;
+  background:repeating-linear-gradient(90deg,#F3EDE0 0 1px,#D8CEB9 1px 1.6px),#E9E2D2;box-shadow:0 1px 2px rgba(60,45,20,.25)}
+.nb-page.l::after{left:-7px;border-radius:3px 0 0 4px}
+.nb-page.r::after{right:-7px;border-radius:0 3px 4px 0}
+.nb-spread::before{content:"";position:absolute;left:-7px;right:-7px;bottom:-7px;height:8px;z-index:0;border-radius:0 0 5px 5px;
+  background:repeating-linear-gradient(180deg,#F3EDE0 0 1px,#D6CCB6 1px 1.7px);box-shadow:0 2px 3px rgba(60,45,20,.3)}
+/* the fold: soft shadow into the spine with a thin lifted highlight */
+.nb-spread::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:120px;transform:translateX(-50%);pointer-events:none;z-index:2;
+  background:linear-gradient(90deg,transparent 0,rgba(70,50,25,.05) 25%,rgba(60,42,20,.18) 44%,rgba(40,28,12,.32) 49.4%,rgba(255,250,240,.35) 50%,rgba(40,28,12,.3) 50.6%,rgba(60,42,20,.16) 56%,rgba(70,50,25,.05) 75%,transparent 100%)}
+.nb-print{margin:0;font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:14px;color:var(--rust)}
+.nb-page.l .nb-print.foot{margin-top:auto}
+.hand{font-family:var(--hand);color:var(--ink2);font-size:calc(var(--nbw)*.022);line-height:1.4}
+.nb-a{font-size:calc(var(--nbw)*.02)}
+.nb-mobile{display:none}
+.nb-intro{margin:auto 0}
+.nb-intro p{margin:0 0 .55em}
+.nb-arrow{display:block;width:calc(var(--nbw)*.12);height:auto;margin:.3em 0 0 auto;color:var(--ink2)}
+.nb-log{flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;gap:calc(var(--nbw)*.018);padding-bottom:8px;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 24px);mask-image:linear-gradient(180deg,transparent 0,#000 24px)}
+.nb-log::-webkit-scrollbar{display:none}
+.nb-log::before{content:"";margin-top:auto}
+.nb-q{margin:0;font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:15px;color:#7C7266}
+.nb-a{margin:0}
+.nb-a .w{white-space:nowrap}
+.nb-a .c{position:relative;top:var(--y,0)}
+@media (prefers-reduced-motion:no-preference){.nb-a .c{animation:ink .22s ease-out both}}
+@keyframes ink{from{opacity:0;filter:blur(1.5px)}to{opacity:1;filter:none}}
+.nb-a .ex{display:block;padding-left:.8em}
+.nb-a .lnk{text-align:left;background:none;border:0;padding:0;font:inherit;color:var(--rust);cursor:pointer;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.nb-line{display:flex;align-items:center;gap:8px;border-top:1px solid rgba(140,120,90,.25);padding-top:10px;margin-top:10px}
+.nb-line span{font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:13px;color:var(--rust)}
+.nb-input{flex:1;min-width:0;border:0;background:transparent;outline:none;font-family:'Newsreader',Georgia,serif;font-size:13px;color:var(--ink);padding:4px 0}
+.nb-input::placeholder{color:#A0968A;font-style:italic}
+.nb-ribbon{position:absolute;left:calc(50% - var(--nbw)*.007);top:-2px;bottom:calc(var(--nbw)*-.045);width:calc(var(--nbw)*.014);min-width:9px;background:linear-gradient(90deg,#7E3421,#A94E33 45%,#8A3924);clip-path:polygon(0 0,100% 0,100% 100%,50% calc(100% - var(--nbw)*.012),0 100%);z-index:3;box-shadow:none;filter:drop-shadow(1px 1px 1px rgba(60,30,20,.35))}
+
+
+/* =========================================================
+   LAPTOP WORLD — bright desk, aluminum, a chat on screen
+   ========================================================= */
+body.w-lp{--ground:#CFE4DB;--ink:#15171A;--muted:#6A7079;--rule:rgba(21,23,26,.1);--olive:#2F6DF6;--nudge:#2F6DF6;--sans:'Geist',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'Geist Mono',ui-monospace,Menlo,monospace;color-scheme:light;
+  background:#CFE4DB radial-gradient(ellipse 90% 70% at 50% 0%,#E6F2EC 0%,rgba(230,242,236,0) 70%)}
+body.w-lp .nav{background:rgba(236,238,241,.7);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px)}
+body.w-lp .nav .brand{font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:-.01em;text-transform:none;border-radius:8px;border-color:rgba(21,23,26,.2);padding:6px 12px}
+body.w-lp .nav .brand::after{font-family:var(--sans);font-size:12px;letter-spacing:0;text-transform:none;border-radius:6px}
+body.w-lp .nav .links button,body.w-lp .nav .links a.navlink{font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;color:#3B4048}
+body.w-lp .nav .links .hire{border:0;background:#15171A;color:#fff;padding:6px 12px;border-radius:8px}
+body.w-lp .lbl{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--muted)}
+body.w-lp .blk{border-top-color:rgba(21,23,26,.1)}
+body.w-lp .note{font-family:var(--sans);font-size:14px;line-height:1.55;color:var(--ink)}
+body.w-lp .note.lp-only{color:var(--muted);font-size:13px}
+body.w-lp .meta{font-family:var(--sans);font-size:14px;letter-spacing:0;text-transform:none;row-gap:6px}
+body.w-lp .panel{font-family:var(--sans);font-size:15.5px;background:#fff;border-radius:14px}
+body.w-lp .panel h2{font-family:var(--sans);font-size:26px;font-weight:600;letter-spacing:-.02em;text-transform:none}
+body.w-lp .panel li b,body.w-lp .panel .btn,body.w-lp .panel .x{font-family:var(--sans);letter-spacing:0;text-transform:none}
+body.w-lp .panel li b{font-size:15.5px;font-weight:600}
+body.w-lp .scrim{background:rgba(236,238,241,.55);backdrop-filter:blur(8px)}
+body.w-lp .machine,body.w-lp .notebook{display:none}
+.laptop{display:none}
+body.w-lp .laptop{display:block}
+body.w-lp .center{align-self:center}
+.laptop{--lu:48px;width:calc(var(--lu)*16.4);margin:6px 0 18px}
+.lp-screen{width:calc(var(--lu)*15.6);margin:0 auto;padding:calc(var(--lu)*.24);border-radius:calc(var(--lu)*.34) calc(var(--lu)*.34) 0 0;background:#0B0C0E;box-shadow:inset 0 0 0 1px #2A2D31}
+.lp-window{height:calc(var(--lu)*6.6);border-radius:calc(var(--lu)*.12);overflow:hidden;background:#FBFBFC;display:flex;flex-direction:column}
+.lp-bar{flex:none;height:calc(var(--lu)*.5);display:flex;align-items:center;gap:6px;padding:0 calc(var(--lu)*.24);background:#F1F2F4;border-bottom:1px solid #E1E3E6;font-family:var(--sans);font-size:max(11px,calc(var(--lu)*.2));color:#6A7079}
+.lp-bar i{width:calc(var(--lu)*.18);height:calc(var(--lu)*.18);border-radius:50%;background:#FF5F57}
+.lp-bar i:nth-child(2){background:#FEBC2E}.lp-bar i:nth-child(3){background:#28C840}
+.lp-bar span{margin:0 auto;padding-right:calc(var(--lu)*.8)}
+.lp-log{flex:1;min-height:0;overflow-y:auto;padding:calc(var(--lu)*.34) calc(var(--lu)*.9) calc(var(--lu)*.1);display:flex;flex-direction:column;gap:calc(var(--lu)*.22);font-family:var(--sans);font-size:max(13px,calc(var(--lu)*.27));line-height:1.55;color:#1F2227}
+.lp-log::before{content:"";margin-top:auto}
+.lp-hello{margin:0;color:#6A7079}
+.lp-hello b{display:block;color:#15171A;font-weight:600;font-size:1.35em;letter-spacing:-.015em;margin-bottom:2px}
+.lp-q{align-self:flex-end;max-width:78%;margin:0;background:#EEF0F3;color:#15171A;padding:.45em .85em;border-radius:14px}
+.lp-a{margin:0;max-width:92%}
+.lp-a .ex{display:block;margin:.35em 0;padding:.4em .7em;border-radius:8px;background:#F1F3F6;font-family:var(--mono);font-size:.88em}
+.lp-a .lnk{text-align:left;background:none;border:0;padding:0;font:inherit;color:var(--olive);cursor:pointer;text-decoration:none;font-weight:500}
+.lp-a .lnk:hover{text-decoration:underline}
+.lp-a .wd{animation:wd .25s ease-out both}
+@keyframes wd{from{opacity:0}to{opacity:1}}
+.lp-form{flex:none;margin:calc(var(--lu)*.12) calc(var(--lu)*.9) calc(var(--lu)*.3);display:flex;align-items:center;gap:8px;padding:calc(var(--lu)*.14) calc(var(--lu)*.18) calc(var(--lu)*.14) calc(var(--lu)*.28);border-radius:12px;background:#fff;box-shadow:0 0 0 1px #E1E3E6,0 2px 6px rgba(20,24,30,.05)}
+.lp-input{flex:1;min-width:0;border:0;outline:none;background:transparent;font-family:var(--sans);font-size:max(13px,calc(var(--lu)*.27));color:#15171A}
+.lp-input::placeholder{color:#9AA0A8}
+.lp-send{flex:none;width:calc(var(--lu)*.52);height:calc(var(--lu)*.52);min-width:26px;min-height:26px;border-radius:8px;border:0;background:#15171A;color:#fff;cursor:pointer;font-size:max(12px,calc(var(--lu)*.24))}
+.lp-hinge{width:calc(var(--lu)*15.6);height:calc(var(--lu)*.14);margin:0 auto;border-radius:0 0 3px 3px;background:linear-gradient(180deg,#8E949B,#C6CBD0)}
+.lp-base{width:calc(var(--lu)*15.6);margin:0 auto;padding:calc(var(--lu)*.34) calc(var(--lu)*.3) calc(var(--lu)*.4);border-radius:0 0 calc(var(--lu)*.36) calc(var(--lu)*.36);
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,rgba(0,0,0,.02) 1px 3px),linear-gradient(180deg,#DADDE1,#CBD0D5);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 30px 60px -28px rgba(20,24,30,.45),0 2px 0 #9AA0A6}
+.lp-well{padding:calc(var(--lu)*.1);border-radius:calc(var(--lu)*.14);background:#B9BEC4;box-shadow:inset 0 1px 3px rgba(0,0,0,.28)}
+.lp-deck{display:flex;flex-direction:column;align-items:center;gap:calc(var(--lu)*.09);user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.lp-row{display:flex;gap:calc(var(--lu)*.085)}
+.lk{--w:1;position:relative;width:calc(var(--lu)*.85*var(--w) + var(--lu)*.085*(var(--w) - 1));height:calc(var(--lu)*.78);border:0;padding:0;cursor:pointer;border-radius:calc(var(--lu)*.12);
+  background:linear-gradient(180deg,#2B2E33,#1C1E22);color:#EDEFF2;font-family:var(--sans);font-size:calc(var(--lu)*.24);line-height:1.05;
+  box-shadow:inset 0 .5px 0 rgba(255,255,255,.14),0 1px 0 rgba(0,0,0,.55),0 2px 3px rgba(0,0,0,.22);display:flex;align-items:center;justify-content:center;flex-direction:column;transition:transform .05s,box-shadow .05s;-webkit-tap-highlight-color:transparent}
+.lk small{display:block;font-size:.72em;opacity:.65}
+.lk.mod{font-size:calc(var(--lu)*.18);align-items:flex-start;justify-content:flex-end;padding:0 0 calc(var(--lu)*.12) calc(var(--lu)*.14)}
+.lk.mod.r{align-items:flex-end;padding:0 calc(var(--lu)*.14) calc(var(--lu)*.12) 0}
+.lk.pressed,.lk:active{transform:translateY(1.5px) scale(.985);box-shadow:inset 0 .5px 0 rgba(255,255,255,.1),0 0 10px rgba(170,200,255,.35)}
+.lk.pressed{text-shadow:0 0 8px rgba(190,215,255,.9)}
+.lk.on{box-shadow:inset 0 .5px 0 rgba(255,255,255,.14),inset 0 -2px 0 #2F6DF6}
+.lk:focus{outline:none}
+.lp-base{position:relative}.stk{position:absolute;pointer-events:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,.25)) drop-shadow(0 3px 6px rgba(20,24,30,.18))}.stk-dog{width:calc(var(--lu)*1.4);right:calc(var(--lu)*2.55);bottom:calc(var(--lu)*.2);transform:rotate(-14deg);z-index:2}.stk-dc{width:calc(var(--lu)*1.35);right:calc(var(--lu)*.85);bottom:calc(var(--lu)*.6);transform:rotate(19deg);z-index:1}
+.lp-pad{width:calc(var(--lu)*6);height:calc(var(--lu)*1.5);margin:calc(var(--lu)*.3) auto 0;border-radius:calc(var(--lu)*.18);background:linear-gradient(180deg,#D2D6DB,#C8CDD2);box-shadow:inset 0 0 0 1px rgba(0,0,0,.08),inset 0 1px 2px rgba(0,0,0,.08)}
+
+@media (max-width:1060px){
+  body{overflow:auto}
+  .stage{grid-template-columns:1fr;height:auto;min-height:calc(100dvh - 52px);align-items:start}
+  .side.left{display:none}
+  .side.right{order:-1;padding:18px 0 0}
+  .right .prefs{display:none}
+  .pop{left:0;right:auto}
+}
+@media (max-width:1060px){
+  .nb-page.l{display:none}
+  .nb-spread{grid-template-columns:1fr}
+  .nb-spread::after{display:none}
+  .nb-page.r{border-radius:4px}
+  .notebook{height:auto;min-height:480px;transform:none;margin-bottom:60px}
+  .hand,.nb-a{font-size:18px}
+  .nb-ribbon{display:none}
+  .nb-mobile{display:block}
+  .nudge{left:16px;top:52px}
+}
+@media (max-width:640px){
+  .deck,.lp-base{display:none}
+  .lp-screen,.laptop{width:100%}
+  .lp-window{height:440px}
+  .nav .links{gap:14px}
+  .badge{margin-bottom:0}
+  .nav .brand{font-size:12px}
+}
+@media (max-width:640px){
+  body.w-nb .stage{min-height:0;padding-top:8px}
+  body.w-nb .side.right{display:none}
+  body.w-nb .nav .brand::after{display:none}
+  body.w-nb .nav .brand{font-size:18px}
+  body.w-nb .nav .links button,body.w-nb .nav .links a.navlink{font-size:14px}
+  body.w-nb .nav .links{gap:10px}
+  body.w-nb .nav{gap:12px}
+  .notebook{width:calc(100vw - 32px);height:calc(100dvh - 52px - 40px);min-height:420px;max-height:720px;margin:22px auto 16px;transform:rotate(-.6deg)}
+  .nb-cover,.nb-spread::before{display:none}
+  .nb-spread{height:100%;filter:drop-shadow(0 14px 22px rgba(40,30,20,.22)) drop-shadow(0 2px 3px rgba(40,30,20,.18))}
+  .nb-page.r{height:100%;border-radius:3px 3px 6px 6px;padding:40px 20px 16px 46px;
+    background:linear-gradient(90deg,transparent 33px,rgba(196,90,80,.55) 33px,rgba(196,90,80,.55) 34.5px,transparent 34.5px),
+      repeating-linear-gradient(180deg,transparent 0 27px,rgba(90,120,160,.22) 27px 28px) 0 38px/100% calc(100% - 38px) no-repeat,#FBF8F0;
+    box-shadow:0 1px 0 #E9E2D2,0 2px 0 #F6F1E6,0 3px 0 #E4DCCB,0 4px 0 #F3EDE1}
+  .nb-page.r::before{content:"";position:absolute;left:8px;right:8px;top:-18px;height:30px;z-index:3;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2722%27%20height%3D%2730%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20x2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%237C8288%27/%3E%3Cstop%20offset%3D%27.45%27%20stop-color%3D%27%23E4E7EA%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%236E747A%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle%20cx%3D%2711%27%20cy%3D%2722%27%20r%3D%273.4%27%20fill%3D%27%232B2A28%27/%3E%3Cpath%20d%3D%27M8%2022%20C%206%2012%2C%208%203%2C%2012%203%20C%2016%203%2C%2016%2012%2C%2014%2020%27%20fill%3D%27none%27%20stroke%3D%27url%28%23g%29%27%20stroke-width%3D%272.6%27%20stroke-linecap%3D%27round%27/%3E%3C/svg%3E") 0 0/22px 30px repeat-x}
+  .nb-page.r::after{display:none}
+  .hand,.nb-a{font-size:18px;line-height:28px}
+  .nb-log{padding-top:2px}
+  body.w-nb .nb-log::before{display:none}
+  .nb-log{justify-content:flex-start}
+  .nb-line{margin-top:6px}
+  .nb-input,.nb-line span{font-size:16px}
+}
+body .panel{border-radius:18px}
+body .deckwrap{border:0;border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.08),0 8px 24px -8px rgba(0,0,0,.22)}
+body .deckwrap iframe{border:0;border-radius:12px}.deckwrap .deckimg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;background:#F4F5F7}
+body .panel .rs-img{border-radius:10px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 8px 24px -8px rgba(0,0,0,.22)}
+body .nav .brand::after{top:calc(100% + 12px);font-size:12px;padding:9px 13px;border-radius:8px;box-shadow:0 8px 22px -8px rgba(0,0,0,.45);transform:translateY(-4px);transition:opacity .2s ease,transform .2s ease}
+body .nav .brand::before{content:"";position:absolute;left:18px;top:calc(100% + 6px);width:12px;height:12px;background:var(--ink);transform:rotate(45deg) translateY(-4px);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;z-index:19}
+body .nav .brand:hover::after,body .nav .brand:focus-visible::after,body .nav .brand.tip-on::after{opacity:1;transform:none}
+body .nav .brand:hover::before,body .nav .brand:focus-visible::before,body .nav .brand.tip-on::before{opacity:1;transform:rotate(45deg)}
+body.w-nb .nav .brand::after{font-size:16px;padding:8px 14px}
+body.w-lp .nav .brand::after{font-size:14px;font-weight:500;padding:9px 14px;border-radius:10px}
+body .nav .brand.tip-on{animation:brandpulse 1.6s ease-out 2}
+@keyframes brandpulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--nudge) 55%,transparent)}100%{box-shadow:0 0 0 12px transparent}}
+body.w-nb .nav .brand.tip-on{animation:none}
+@media (prefers-reduced-motion:reduce){body .nav .brand.tip-on{animation:none}}
+/* Notebook world: upright, neutral serif for the non-handwritten bits */
+body.w-nb .nb-print,body.w-nb .meta dt,body.w-nb .nb-line span,body.w-nb .nb-input,body.w-nb .nb-input::placeholder,body.w-nb .nb-q,body.w-nb .nav .brand::after,body.w-nb .meta dd,body.w-nb .panel,body.w-nb .panel *{font-style:normal}
+body.w-nb .nb-line span{font-weight:500;letter-spacing:.02em}
+.menu-btn{display:none}
+@media (max-width:640px){
+  .nav{height:56px;gap:12px;position:sticky;top:0;z-index:30}
+  .nav .brand,body.w-nb .nav .brand,body.w-lp .nav .brand{font-size:15px;padding:8px 12px;min-height:40px}
+  body.w-nb .nav .brand{font-size:21px;padding:0}
+  .nav .brand::after{display:none}
+  .menu-btn{display:inline-flex;align-items:center;gap:8px;margin-left:auto;min-height:44px;padding:0 4px 0 10px;background:none;border:0;color:inherit;font:inherit;font-size:13px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  body.w-nb .menu-btn{font-family:var(--hand);font-size:19px;letter-spacing:0;text-transform:none}
+  body.w-lp .menu-btn{font-family:var(--sans);font-size:15px;font-weight:500;letter-spacing:0;text-transform:none}
+  .mb-lines{position:relative;width:18px;height:10px;display:inline-block}
+  .mb-lines i{position:absolute;left:0;right:0;height:1.5px;border-radius:2px;background:currentColor;transition:transform .2s ease,top .2s ease}
+  .mb-lines i:first-child{top:1px}.mb-lines i:last-child{top:8px}
+  .nav.open .mb-lines i:first-child{top:4.5px;transform:rotate(45deg)}
+  .nav.open .mb-lines i:last-child{top:4.5px;transform:rotate(-45deg)}
+  .nav .links,body.w-nb .nav .links{position:absolute;left:0;right:0;top:100%;margin:0;display:flex;flex-direction:column;align-items:stretch;gap:0;padding:6px 16px 14px;overflow:visible;
+    background:var(--ground,#1B1A18);border-bottom:1px solid var(--rule);box-shadow:0 18px 30px -18px rgba(0,0,0,.35);
+    opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s}
+  body.w-nb .nav .links{background:rgba(250,246,238,.97)}
+  .nav.open .links,body.w-nb .nav.open .links,body.w-lp .nav.open .links{opacity:1;visibility:visible;transform:none;transition:opacity .18s ease,transform .18s ease}
+  .nav .links > *,body.w-nb .nav .links > *,body.w-lp .nav .links > *{display:flex;align-items:center;min-height:52px;width:100%;padding:0 2px;text-align:left;font-size:15px;border-bottom:1px solid var(--rule);border-radius:0;background:none;color:inherit;letter-spacing:.02em;text-transform:none}
+  body.w-nb .nav .links > *{font-size:22px}
+  .nav .links > *:last-child{border-bottom:0}
+  .nav .links .hire,body.w-lp .nav .links .hire{margin-top:12px;justify-content:center;min-height:48px;border:1px solid currentColor;border-radius:999px}
+  body.w-lp .nav .links .hire{background:#15171A;color:#fff;border-color:#15171A}
+  body .nav .links > button,body .nav .links > a{font-size:14px}
+  body.w-nb .nav .links > button{font-size:22px}
+  body.w-lp .nav .links > button{font-size:16px}
+  body.w-nb .nav .links{background:#FAF6EE}
+  body.w-nb .nav .links .hire{border-radius:999px;border-color:rgba(47,42,37,.6)}
+  body.nav-open{overflow:hidden}
+  .nav .links button::after,.nav .links button::before{display:none}
+}
+@media (prefers-reduced-motion:reduce){.cap{transition:none}.bar.strike{animation:none}}
+</style>
 </head>
-<body style="font-family:system-ui;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#e9e3d9">
-<a href="https://claude.ai/artifact/NdUVfRZSLu8kr26t5z3p9E" style="color:#2a2418">open notepad</a>
+<body>
+
+
+<nav class="nav" aria-label="Main">
+  <button class="brand" type="button" id="swap" data-tip="Same Jenny, different desk" aria-label="Jenny Fant. Switch to a different desk">Jenny Fant</button>
+  <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links"><span class="mb-lines" aria-hidden="true"><i></i><i></i></span><span class="mb-t">Menu</span></button>
+  <div class="links" id="nav-links">
+    <button type="button" class="navlink" data-open="resume">Resume</button>
+    <button type="button" data-open="content">Content design</button>
+    <button type="button" data-open="model">Model design</button>
+    <button type="button" data-open="contact" class="hire">Contact</button>
+  </div>
+</nav>
+
+<div class="nudge" id="nudge" aria-hidden="true"><svg viewBox="0 0 46 34" width="28" height="21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M43 30 C 30 30, 14 24, 6 6"/><path d="M4 13 L6 5 L13 9"/></svg><span>Click here</span></div>
+<main class="stage" id="stage">
+  <section class="side left" aria-label="About">
+    <div class="blk about">
+      <span class="lbl">About</span>
+      <p class="note" style="color:var(--ink)">Content and model designer shaping the words, structure, and systems behind products, plus how AI behaves and explains itself.</p>
+    </div>
+    <div class="blk">
+      <span class="lbl">Details</span>
+      <dl class="meta">
+        <dt>Based</dt><dd>San Francisco</dd>
+        <dt>Focus</dt><dd>Content design<br>Model design</dd>
+        <dt>Lately</dt><dd>Meta Superintelligence Labs</dd>
+      </dl>
+    </div>
+  </section>
+
+  <div class="center">
+  <div class="machine" id="machine">
+    <div class="top">
+      <div class="platen"></div>
+      <div class="knob l"></div><div class="knob r"></div><div class="lever"></div>
+      <div class="paper">
+        <form class="sheet" id="sheet" autocomplete="off">
+          <div class="typed" id="typed" aria-live="polite"><p>This typewriter answers questions about content design, model design, and Jenny's work.</p></div>
+          <div class="typed line"><span aria-hidden="true">&gt;</span><label for="composer" class="sr" hidden>Your question</label><input class="composer" id="composer" name="composer" type="text" maxlength="90" placeholder="what is content design?" enterkeyhint="send" autocomplete="off" spellcheck="false" aria-label="Type a question"></div>
+        </form>
+      </div>
+      <div class="bail"><i></i><i></i></div>
+    </div>
+    <div class="housing">
+      <div class="vent l"></div><div class="vent r"></div>
+      <div class="basket"><div class="guide"></div><div class="bar" id="bar"></div></div>
+    </div>
+    <div class="front">
+      <div class="badge"><b>FANT</b><small>No. 7</small></div>
+      <div class="deck" id="deck" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="notebook" id="notebook">
+    <div class="nb-cover"></div>
+    <div class="nb-spread">
+      <section class="nb-page l">
+        <div class="hand nb-intro">
+          <p>Hi, I'm Jenny.</p>
+          <p>I'm a content designer. I shape the words and systems behind products and how AI behaves.</p>
+          <p>Write me a question on the next page and I'll write back.</p>
+          <svg class="nb-arrow" viewBox="0 0 120 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 26 C 30 10, 70 34, 110 18"/><path d="M100 10 L111 18 L101 27"/></svg>
+        </div>
+      </section>
+      <section class="nb-page r">
+        <div class="nb-log" id="nb-log" aria-live="polite"><p class="hand nb-a nb-mobile">Hi, I'm Jenny. Write me a question below and I'll write back.</p></div>
+        <form class="nb-line" id="nb-form" autocomplete="off"><span aria-hidden="true">Q.</span><input class="nb-input" id="nb-input" name="nb-input" type="text" maxlength="120" placeholder="What is content design?" enterkeyhint="send" aria-label="Write a question"></form>
+      </section>
+    </div>
+    <div class="nb-ribbon"></div>
+  </div>
+
+  <div class="laptop" id="laptop">
+    <div class="lp-screen">
+      <div class="lp-window">
+        <div class="lp-bar" aria-hidden="true"><i></i><i></i><i></i><span>Ask Jenny</span></div>
+        <div class="lp-log" id="lp-log" aria-live="polite">
+          <p class="lp-hello"><b>Ask about Jenny's work.</b>Ask about content design, model design, or anything on her resume.</p>
+        </div>
+        <form class="lp-form" id="lp-form" autocomplete="off">
+          <input class="lp-input" id="lp-input" name="lp-input" type="text" maxlength="120" placeholder="Ask a question" enterkeyhint="send" aria-label="Ask a question">
+          <button class="lp-send" type="submit" aria-label="Send">↑</button>
+        </form>
+      </div>
+    </div>
+    <div class="lp-hinge"></div>
+    <div class="lp-base">
+      <div class="lp-well"><div class="lp-deck" id="lp-deck" aria-hidden="true"></div></div>
+      <div class="lp-pad"></div><img class="stk stk-dog" src="jax-sticker.png" alt="" aria-hidden="true"><img class="stk stk-dc" src="dolphin-club-sticker.png" alt="" aria-hidden="true">
+    </div>
+  </div>
+
+  </div>
+
+  <aside class="side right" aria-label="Try asking">
+    <div class="blk prefs">
+      <div class="pref tw-only"><span class="lbl">Sound</span><button type="button" class="textbtn" id="sound" aria-pressed="false">Off</button></div>
+      <p class="note tw-only">Type or click the keys, then press Return.</p><p class="note nb-only">Write a question on the page, then press Return.</p><p class="note lp-only">Type on your keyboard or click the keys. Return sends.</p>
+    </div>
+  </aside>
+</main>
+
+<div class="scrim" id="scrim" hidden>
+  <div class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="panel-title" tabindex="-1"></div>
+</div>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const body = document.body, input = $('#composer'), sheet = $('#sheet'), typed = $('#typed'), machine = $('#machine');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(pointer: fine)').matches;
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  /* ---------- Panels ---------- */
+  const PANELS = {
+    about: ['Jenny Fant', `<p>Content and model designer in San Francisco. Nearly a decade at Meta, most recently at Meta Superintelligence Labs, designing products that help people understand and trust technology.</p><div class="acts"><button class="btn" data-open="contact">Get in touch</button></div>`],
+    resume: ['Resume', `<div class="acts rs-acts"><a class="btn" href="Jenny_Fant_Resume.pdf" download="Jenny_Fant_Resume.pdf">Download PDF</a></div><img class="rs-img" src="resume.webp" alt="Jenny Fant's resume: content and model design, Meta 2019 to 2026">`],
+    content: ['Content design', `<div class="deckwrap"><img class="deckimg" src="deck/slide-01.webp" alt="Content design portfolio, slide 1 of 37" width="1600" height="900" decoding="async"></div><div class="deckctl"><button type="button" class="deck-prev" aria-label="Previous slide">←</button><span class="deck-n" aria-live="polite"></span><button type="button" class="deck-next" aria-label="Next slide">→</button></div><div class="acts"><a class="btn" href="https://www.figma.com/deck/ute4vgu3tr02nEE2q5jVu8/Jenny-Fant-Content-Design---September-2026?node-id=1-995" target="_blank" rel="noopener">Open full screen in Figma</a></div>`],
+    model: ['Model design', `<p>More and more, the model is the product. I'm drawn to the questions underneath that: how an AI should sound, when it should hold back, and how it can be honest about what it can and can't do. I like working through those questions with researchers, writing and testing, and adjusting as we learn.</p><ul>
+      <li><b>Voice and character</b>I write to help AI feel clear, warm, and trustworthy, from the tone of a single reply to how it talks about itself.</li>
+      <li><b>Research partnership</b>I worked closely with AI researchers on Agentic Research Environments (ARE), helping shape the prompts and language used to evaluate agents. That work was part of the ARE &amp; GAIA2 publication.</li>
+      <li><b>Evaluation and iteration</b>I test behavior, comparing outputs against clear principles, keeping what works, and letting go of what doesn't.</li>
+      <li><b>Empathy at scale</b>I’ve spent years writing for people at the margins, from new-to-internet users to teens and families, and built a muscle considering needs from people around the globe.</li></ul><div class="acts"><span class="soon">Full model design portfolio coming soon.</span></div>`],
+    contact: ['Contact', `<p>Open to content design and model design roles.</p><p><span class="email" id="email">jennyfant@icloud.com</span></p><div class="acts"><button class="btn" id="copy" type="button">Copy email</button><a class="btn" href="https://www.linkedin.com/in/jennyfant" target="_blank" rel="noopener">LinkedIn</a></div>`]
+  };
+  const scrim = $('#scrim'), panel = $('#panel'); let lastFocus = null;
+
+  document.addEventListener('click', async e => {
+    const a = e.target.closest('a[download]'); if (!a || !window.claude || !window.claude.use) return;
+    e.preventDefault();
+    try {
+      const dl = await window.claude.use('downloads');
+      if (!dl) { window.open(a.href, '_blank'); return; }
+      const blob = await (await fetch(a.getAttribute('href'))).blob();
+      await dl.save({ filename: a.getAttribute('download'), data: blob });
+    } catch (err) { if (err && err.code === 'unavailable') window.open(a.href, '_blank'); }
+  });
+
+  (() => {
+    const nav = document.querySelector('.nav'), mb = document.getElementById('menu-btn'), links = document.getElementById('nav-links');
+    if (!mb) return;
+    const set = o => { nav.classList.toggle('open', o); document.body.classList.toggle('nav-open', o); mb.setAttribute('aria-expanded', String(o)); mb.querySelector('.mb-t').textContent = o ? 'Close' : 'Menu'; };
+    mb.addEventListener('click', e => { e.stopPropagation(); set(!nav.classList.contains('open')); });
+    links.addEventListener('click', e => { if (e.target.closest('button,a')) set(false); });
+    document.addEventListener('click', e => { if (nav.classList.contains('open') && !nav.contains(e.target)) set(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) { set(false); mb.focus(); } });
+    matchMedia('(min-width:641px)').addEventListener('change', m => { if (m.matches) set(false); });
+  })();
+
+  const DECK = ["1-995", "1-1001", "1-1052", "1-1056", "2010-1153", "2010-1171", "2011-1799", "2011-1760", "2011-1303", "2011-1325", "2011-1339", "2011-1381", "2011-1407", "2011-1638", "2008-786", "1-1743", "1-1149", "1-1155", "2007-778", "2007-284", "2007-305", "2007-325", "2007-335", "2007-345", "2007-370", "2007-400", "2007-421", "2007-446", "2007-471", "2007-496", "2007-537", "2007-569", "2007-603", "2007-633", "2007-667", "2007-697", "2011-1991"];
+  let deckIdx = 0;
+  function deckGo(i) {
+    deckIdx = Math.max(0, Math.min(DECK.length - 1, i));
+    const img = panel.querySelector('.deckimg');
+    if (img) { img.src = 'deck/slide-' + String(deckIdx + 1).padStart(2, '0') + '.webp'; img.alt = 'Content design portfolio, slide ' + (deckIdx + 1) + ' of ' + DECK.length; }
+    const a = panel.querySelector('a[href*="figma.com/deck"]'); if (a) a.setAttribute('href', a.getAttribute('href').replace(/node-id=[\d-]+/, 'node-id=' + DECK[deckIdx]));
+    const n = panel.querySelector('.deck-n'); if (n) n.textContent = (deckIdx + 1) + ' / ' + DECK.length;
+    const p = panel.querySelector('.deck-prev'), x = panel.querySelector('.deck-next');
+    if (p) p.disabled = deckIdx === 0; if (x) x.disabled = deckIdx === DECK.length - 1;
+  }
+  // Preload every slide quietly once the page is idle, so opening and flipping is instant
+  addEventListener('load', () => setTimeout(() => { DECK.forEach((_, k) => { const im = new Image(); im.decoding = 'async'; im.src = 'deck/slide-' + String(k + 1).padStart(2, '0') + '.webp'; }); }, 1500));
+
+  document.addEventListener('click', e => { const b = e.target.closest('.deck-prev,.deck-next'); if (!b) return; deckGo(deckIdx + (b.classList.contains('deck-next') ? 1 : -1)); });
+  function openPanel(id, slide) {
+    
+    const p = PANELS[id]; if (!p) return; lastFocus = document.activeElement;
+    panel.classList.toggle('rs', id === 'resume'); panel.classList.toggle('wide', id === 'content'); panel.innerHTML = `<button type="button" class="x" data-close>Close</button><h2 id="panel-title">${p[0]}</h2>${p[1]}`;
+    scrim.hidden = false; panel.focus({ preventScroll: true });
+    const c = $('#copy'); if (c) c.addEventListener('click', copyEmail);
+    if (id === 'content') { deckIdx = Math.max(0, DECK.indexOf(slide || DECK[0])); deckGo(deckIdx); const n = panel.querySelector('.deck-n'); if (n) n.textContent = (deckIdx + 1) + ' / ' + DECK.length; const pb = panel.querySelector('.deck-prev'); if (pb) pb.disabled = deckIdx === 0; }
+    if (id === 'content' && slide) panel.querySelectorAll('iframe[src],a[href*="figma.com"]').forEach(el => { const at = el.tagName === 'IFRAME' ? 'src' : 'href'; el.setAttribute(at, el.getAttribute(at).replace(/node-id=[\d-]+/, 'node-id=' + slide)); });
+  }
+  function closePanel() { scrim.hidden = true; if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true }); }
+  document.addEventListener('click', e => {
+    const o = e.target.closest('[data-open]'); if (o && !o.closest('.key')) { e.preventDefault(); openPanel(o.dataset.open, o.dataset.slide); return; }
+    if (e.target.closest('[data-close]') || e.target === scrim) closePanel();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !scrim.hidden) closePanel(); if (!scrim.hidden && /^Arrow(Left|Right)$/.test(e.key) && panel.querySelector('.deckimg') && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) { e.preventDefault(); deckGo(deckIdx + (e.key === 'ArrowRight' ? 1 : -1)); } });
+  function copyEmail(e) {
+    const b = e.currentTarget, sel = () => { getSelection().selectAllChildren($('#email')); b.textContent = 'Press ⌘C to copy'; };
+    try { navigator.clipboard.writeText('jennyfant@icloud.com').then(() => { b.textContent = 'Copied'; setTimeout(() => b.textContent = 'Copy email', 1600); }, sel); } catch (err) { sel(); }
+  }
+
+  /* ---------- Keyboard ---------- */
+  const FN = [['resume','📄','Resume'],['content','✍️','Content design'],['model','🤖','Model design'],['contact','✉️','Contact']];
+  const ROWS = [
+    ['1','2','3','4','5','6','7','8','9','0','-','=',{k:'Backspace',t:'Back<br>space',w:1.5}],
+    [{k:'Tab',t:'Tab',w:1.3},'q','w','e','r','t','y','u','i','o','p','[',']'],
+    [{k:'CapsLock',t:'Lock',w:1.5},'a','s','d','f','g','h','j','k','l',';',"'",{k:'Enter',t:'Return',w:1.5}],
+    [{k:'Shift',t:'Shift',w:1.8},'z','x','c','v','b','n','m',',','.','/',{k:'Shift',t:'Shift',w:1.8}]
+  ];
+  const SHIFT = {'1':'!','2':'@','3':'#','4':'$','5':'%','6':'_','7':'&','8':'*','9':'(','0':')','-':'¢','=':'+','[':'½',']':'¼',';':':',"'":'"',',':',','.':'.','/':'?'};
+  const keyEls = {}, deck = $('#deck');
+  function key(d) {
+    const b = document.createElement('button'); b.type = 'button'; b.tabIndex = -1; b.className = 'key';
+    if (d.w) b.style.setProperty('--w', d.w);
+    let g;
+    if (d.open) { b.classList.add('emo', 'round'); b.dataset.open = d.open; g = d.emo; }
+    else if (d.k.length > 1) { b.classList.add('mod'); g = d.t; }
+    else if (d.k === ' ') g = '';
+    else g = /[a-z]/.test(d.k) ? d.k.toUpperCase() : (SHIFT[d.k] && SHIFT[d.k] !== d.k ? `<small>${SHIFT[d.k]}</small>${d.k}` : d.k);
+    b.innerHTML = `<span class="cap"><span class="g">${g}</span></span>` + (d.tip ? `<span class="tip">${d.tip}</span>` : '');
+    if (d.k) { b.dataset.k = d.k; (keyEls[d.k.toLowerCase()] = keyEls[d.k.toLowerCase()] || []).push(b); }
+    return b;
+  }
+  const fn = document.createElement('div'); fn.className = 'row fn';
+  const grp = document.createElement('div'); grp.className = 'grp';
+  FN.forEach(([open, emo, tip]) => grp.appendChild(key({ open, emo, tip })));
+  ROWS.forEach(r => { const row = document.createElement('div'); row.className = 'row'; r.forEach(x => row.appendChild(key(typeof x === 'string' ? { k: x } : x))); deck.appendChild(row); });
+  const sp = document.createElement('div'); sp.className = 'row'; sp.appendChild(key({ k: ' ', w: 8.2 })); sp.firstChild.classList.add('space'); deck.appendChild(sp);
+
+  /* ---------- Fit to one screen ---------- */
+  function fit() {
+    const narrow = innerWidth <= 1060;
+    const H = innerHeight - 52;
+    const pad = Math.min(40, Math.max(20, innerWidth * .026));
+    const col = narrow ? innerWidth - 2 * pad : innerWidth - 2 * 210 - 4 * pad;
+    const byW = col / 16.2;
+    const byH = narrow ? 60 : (H - 40 - Math.max(200, H * .3)) / 9.2;
+    const u = Math.max(18, Math.min(52, byW, byH) * .86);
+    const machineH = u * (innerWidth <= 640 ? 3.9 : 8.9);
+    const paperH = narrow ? Math.max(260, Math.min(420, H - machineH - 120)) : Math.max(170, H - machineH - 40 - u * 1.4);
+    machine.style.setProperty('--u', u.toFixed(1) + 'px');
+    machine.style.setProperty('--paperH', paperH.toFixed(0) + 'px');
+    scrollDown();
+  }
+  addEventListener('resize', fit);
+
+  /* ---------- Sound ---------- */
+  let soundOn = false, ctx = null;
+  $('#sound').addEventListener('click', e => {
+    soundOn = !soundOn; e.currentTarget.setAttribute('aria-pressed', String(soundOn)); e.currentTarget.textContent = soundOn ? 'On' : 'Off';
+    if (soundOn && !ctx) { try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (err) {} }
+  });
+  function clack(v = 1) {
+    if (!soundOn || !ctx) return;
+    const n = Math.floor(ctx.sampleRate * .045), buf = ctx.createBuffer(1, n, ctx.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 3);
+    const s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain();
+    f.type = 'bandpass'; f.frequency.value = 1500 + Math.random() * 600; f.Q.value = 1.1; g.gain.value = .55 * v;
+    s.buffer = buf; s.connect(f).connect(g).connect(ctx.destination); s.start();
+  }
+  function bell() {
+    if (!soundOn || !ctx) return; const t = ctx.currentTime;
+    [2093, 4186].forEach((fq, i) => { const o = ctx.createOscillator(), g = ctx.createGain(); o.frequency.value = fq; g.gain.setValueAtTime(i ? .04 : .14, t); g.gain.exponentialRampToValueAtTime(.001, t + 1); o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + 1); });
+  }
+
+  /* ---------- Typing on the machine ---------- */
+  const bar = $('#bar');
+  function strike() { if (reduce) return; bar.classList.remove('strike'); void bar.offsetWidth; bar.classList.add('strike'); }
+  const press = els => (els || []).forEach(b => { b.classList.add('pressed'); setTimeout(() => b.classList.remove('pressed'), 110); });
+  let shiftOnce = false, caps = false, busy = false;
+  const mods = () => { (keyEls.shift || []).forEach(b => b.classList.toggle('on', shiftOnce)); (keyEls.capslock || []).forEach(b => b.classList.toggle('on', caps)); };
+  function insert(ch) {
+    if (input.value.length >= 90) return;
+    const s = input.selectionStart ?? input.value.length, e = input.selectionEnd ?? s;
+    input.setRangeText(ch, s, e, 'end');
+  }
+  deck.addEventListener('pointerdown', ev => {
+    const b = ev.target.closest('.key'); if (!b) return;
+    ev.preventDefault(); press([b]); clack();
+    if (b.dataset.open) { openPanel(b.dataset.open); return; }
+    const k = b.dataset.k; strike();
+    if (k === 'Backspace') { const s = input.selectionStart, e = input.selectionEnd; if (s !== e) input.setRangeText('', s, e, 'end'); else if (s > 0) input.setRangeText('', s - 1, s, 'end'); }
+    else if (k === 'Enter') send();
+    else if (k === 'Shift') { shiftOnce = !shiftOnce; mods(); }
+    else if (k === 'CapsLock') { caps = !caps; mods(); }
+    else if (k === 'Tab') {}
+    else { let ch = k; if (/[a-z]/.test(k)) ch = (shiftOnce !== caps) ? k.toUpperCase() : k; else if (shiftOnce && SHIFT[k]) ch = SHIFT[k]; insert(ch); if (shiftOnce) { shiftOnce = false; mods(); } }
+    if (fine) input.focus({ preventScroll: true });
+  });
+  input.addEventListener('keydown', e => {
+    const n = e.key === ' ' ? ' ' : e.key.toLowerCase(); press(keyEls[n]);
+    if (e.key.length === 1 || e.key === 'Backspace') { clack(); strike(); }
+  });
+  sheet.addEventListener('submit', e => { e.preventDefault(); send(); });
+  $('#sheet').parentElement.addEventListener('click', e => { if (!e.target.closest('.lnk')) input.focus({ preventScroll: true }); });
+
+  /* ---------- Answers (typed onto the paper) ---------- */
+  const L = (t, open) => ({ t, open });
+  const S = (t, slide) => ({ t, open: 'content', slide });
+  const P = (t, slide) => ({ t, open: 'content', slide, inline: true });
+  function linkFor(s) {
+    
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'lnk'; b.dataset.open = s.open; if (s.slide) b.dataset.slide = s.slide; return b;
+  }
+  const RES = L('See the resume', 'resume'), CD = L('See the content design portfolio', 'content'), MD = L('See the model design portfolio', 'model'), CT = L('Get in touch', 'contact');
+  const V = (...variants) => ({ variants });
+  const ruleSeen = new Map();
+  let lastEnd = null, lastRule = null;
+  function vary(r) {
+    let a = r ? r[1] : nextFallback();
+    const keep = !!(a && a.variants);
+    if (a && a.variants) { const n = ruleSeen.get(r) || 0; ruleSeen.set(r, n + 1); a = a.variants[n % a.variants.length]; }
+    else if (r && r === lastRule) { a = ["Same answer as a moment ago, so here's something new instead. "].concat(nextFallback()); }
+    a = a.slice();
+    // drop a trailing call to action if the last answer ended with the same one
+    let k = a.length - 1; if (typeof a[k] === 'string' && /^[.\s]*$/.test(a[k])) k--;
+    const tail = a[k];
+    const key = tail && typeof tail === 'object' && !tail.slide ? tail.open : null;
+    if (!keep && key && key === lastEnd && k > 0) { a = a.slice(0, k); if (typeof a[a.length - 1] === 'string') a[a.length - 1] = a[a.length - 1].replace(/[\s:,]+$/, '') .replace(/([^.!?])$/, '$1.'); }
+    lastEnd = key || null; lastRule = r;
+    return a;
+  }
+  const RULES = [
+    [/\b(hi|hello|hey|yo|howdy|good (morning|afternoon|evening))\b/, ["Hello! The quickest way to get to know Jenny is her work. Start with the ", L('content design portfolio', 'content'), ", or ", L('the resume', 'resume'), "."]],
+    [/(are you|is this).*(ai|bot|real|chatgpt|claude|human)/, ["I'm a scripted guide, not a live AI. Jenny wrote every answer, which is kind of the point: deciding what a system says, and when, is her job. ", MD]],
+    [/another/, ["Button labels:\n", { ex: 'OK' }, { ex: 'Delete' }, { ex: 'Delete 3 photos' }, "\nThe last one says exactly what will happen before you press it. There's more of this thinking in the ", L('content design portfolio', 'content'), "."]],
+    [/example|show me|error message/, ["One error message, three ways:\n", { ex: 'Error 403: Forbidden.' }, { ex: "You don't have access to this file." }, { ex: "You don't have access to this file. Ask the owner to share it." }, "\nThe last one says what happened and what to do next. ", CD]],
+    [/crisis|safety check|marked safe|early warning|disaster|earthquake|hurricane|world bank/, ["Jenny owned content for Facebook's crisis response tools. She brought the UN's Early Warnings for All to Facebook with the World Bank, and used on-the-ground research and data science to find wording people understood across literacy levels, which lifted \"marked safe\" check-ins by 5%. ", S('See the crisis response work', '2011-1339')]],
+    [/teen|youth|\bsafety\b|parent|kid|child|family|supervision|co-?design/, ["Jenny was a content design lead on teen safety. She ran co-design sessions with teen safety experts, parent group leaders, and leaders of non-traditional family groups, tracked where academics and policymakers were heading, and built that expertise into the standards every teen and family product starts from. She also led early naming explorations for supervision. ", S('See the teen safety work', '2011-1760')]],
+    [/climate|ipcc|misinformation|science|fact.?check|environment|yale|cambridge/, ["On a three-person climate team (content, product design, research), Jenny turned IPCC and academic science into plain, approachable content for the Climate Science Information Center, partnering with Yale, Cambridge, RMI, the UN, and the European Parliament. ", S('See the climate work', '2011-1303')]],
+    [/share.?a.?thon|naming|name things|variant|pros and cons/, ["Naming is a big part of Jenny's craft. For Instagram Giving she weighed options like \"share-a-thon\" against \"donate-per-share pledge,\" trading off clarity, translation, and tone. ", S('See the naming exploration', '2011-1638')]],
+    [/donat|giving|fundrais|nonprofit|charity|match/, ["On Instagram Giving, Jenny led the ideation, strategy, and execution of donation matching: up to 65% more dollars raised and up to 27% more donation conversions on fundraisers. She partnered with data science and research to improve an already mature product. ", S('See the Instagram Giving work', '2011-1381')]],
+    [/connectivity|free facebook|discover|flex|covid|pandemic|health info|net.?neutral|emerging market|low.?data|literacy/, ["Jenny started at Meta in Connectivity, writing for Free Facebook and Discover, which bring people online who can't afford regular mobile data. The constraints: tiny screens, text only, and global net neutrality policy. A highlight was getting COVID-19 health information to the people who needed it most. ", S('See the connectivity work', '2008-786')]],
+    [/generator|copy tool|ai tool|tooling|scale|empower|\bpms?\b|engineer|xfn|cross.?functional/, ["Jenny built a growth copy generator for Meta Superintelligence Labs. Designers, PMs, and engineers pick a surface, placement, tone, and value props (and can add screenshots and docs), and it returns 10 to 100 ranked options with editorial notes on why some work better. ", S('See the copy generator', '1-1155')]],
+    [/growth|vibes|install|app store|acquisition|muse/, ["Jenny led growth content design for Meta AI launches like Vibes and the Meta AI 2.0 launch, iterating fast on which value props landed with new users. It became Meta AI's highest-impact growth lever to date: 106k installs. ", S('See the growth work', '2010-1171')]],
+    [/vibe.?cod|30 days|page turners|book club|side project|build|claude|cursor|manus|polish|audit/, ["This past March Jenny vibe coded 30 projects in 30 days. One was Page Turners, a site for her book club. She wrote a custom /visual-polish-audit skill with Claude and iterated until the polish score went from 4.6 to 7.1. ", S('See Page Turners', '2007-284')]],
+    [/history|how long|hackathon|early adopter|timeline|decade/, ["Jenny has worked in AI for nearly a decade: training an early AI model on how she formats meeting notes, winning Meta's 2023 global generative AI hackathon, leading AI pilots in central product, and being named in the ARE & GAIA2 publication. ", S('See the timeline', '1-1001')]],
+    [/model design work|jenny's model|meta ai|msl|superintelligence|agentic research|gaia|agentic|agent|standards|terminology/, ["At Meta Superintelligence Labs, Jenny led content standards for MSL and Meta AI, and set foundational industry terminology for agentic research with Agentic Research Environments (ARE). ", S('See the MSL work', '2010-1153'), " or ", L('the model design portfolio', 'model'), "."]],
+    [/content design work|jenny's content|her work|case stud|what has she (done|worked)/, ["Five areas: ", P('MSL and Meta AI', '2010-1153'), ", ", P('teen safety', '2011-1760'), ", ", P('climate and crisis response', '2011-1303'), ", ", P('Instagram Giving', '2011-1381'), ", and ", P('connectivity', '2008-786'), ". Where would you like to start?"]],
+    [/process|approach|how (does|do) (she|you) work|method|collaborat|stakeholder|legal|policy|strategy/, ["Jenny's approach: attention to craft, refining systems, collaborating across disciplines, and grounding decisions in insight. On teen safety that meant listen, integrate, standardize. ", S('See the process', '2011-1760'), " or ", L('the full portfolio', 'content'), "."]],
+    [/weakness|weak spot|growth area|improve|struggle|shortcoming|flaw|downside|strengths and/, ["Strengths first: she earns trust fast in very different rooms, from ", P('teen safety experts and parents', '2011-1760'), " to ", P('IPCC scientists', '2011-1303'), " to ", P('AI researchers', '2010-1153'), ", and she ships under pressure with results like ", P('+65% dollars raised', '2011-1407'), ". Her growth edge: she moves fast and loves to build, so she's put real systems around polish and rigor, like the audit loop that took ", P('Page Turners', '2007-496'), " from a 4.6 to a 7.1. Ask her about it in person. ", CT]],
+    [/ai.?native|use ai|ai tools|how (does|do) (she|you) use ai|llm|agents? (in|for) (her|your) work|claude code|vibe/, ["Very AI-native. She's worked with AI for nearly a decade, won Meta's 2023 generative AI hackathon, built a ", P('growth copy generator', '1-1155'), " that ranks copy against editorial principles, and vibe coded ", P('30 projects in 30 days', '2007-284'), ". This site is one of them. ", CD]],
+    [/lead|mentor|manage|influence|team|culture|discipline|uplevel|future of content/, ["She leads without needing the title: she wrote a content design column, built templates her team adopted widely, led a Figma squad, and mentors. Lately she's focused on ", P('empowering every function to own content', '1-1149'), " as AI changes the craft. ", RES]],
+    [/looking for|next role|ideal|dream|what kind of (role|job|team)|why (is she|are you) (looking|leaving)|available|open to/, ["She's looking for content design or model design roles where language shapes how people understand and trust technology, especially AI. If that sounds like your team, she'd love to talk. ", CT]],
+    [/outside (of )?work|hobbies|fun fact|for fun|personal|dog|jax|sticker|dolphin|swim|book/, ["Off the clock: that's her Aussie, Jax, on the laptop, plus her Dolphin Club sticker. She also runs a book club, and naturally she built it a website. ", S('See Page Turners', '2007-284')]],
+    [/why content design|why (did|do) (she|you)|passion|care about|motivat/, ["She's drawn to moments where words decide whether people can act, like ", P('a crisis alert', '2011-1339'), ", ", P('a teen privacy setting', '2011-1760'), ", or ", P('a first look at an AI tool', '2010-1171'), ". She designs for real-world outcomes. ", CD]],
+    [/impact|result|metric|number|data|success/, ["A few numbers: ", P('106k installs', '2010-1171'), " from Meta AI's top growth lever, ", P('up to +65% dollars raised', '2011-1407'), " from donation matching, and ", P('+5% \"marked safe\" check-ins', '2011-1339'), " in crisis response. ", CD]],
+    [/should (i|we) hire|hire (her|jenny)|worth hiring|why (should|would) (i|we|you) hire|why hire|good fit|right fit|(would you|do you) recommend|is (she|jenny) (good|any good|great|worth|legit)|convince me|sell me/, V(
+      ["Yes. Emphatically yes. Jenny pairs a decade of content design craft with real AI fluency. She shipped Meta AI's highest-impact growth lever (", P('106k installs', '2010-1171'), "), raised up to ", P('65% more for fundraisers', '2011-1407'), ", and worked side by side with researchers on ", P('agent evaluation', '2010-1153'), ". You'd get someone who writes beautifully and builds her own tools. Don't let her get away: ", L('reach out today', 'contact'), "."],
+      ["Short answer: yes. Longer answer: she earns trust in very different rooms, ships under pressure, and brings her own AI tooling, like the ", P('copy generator', '1-1155'), " she built for her team. The ", L('resume', 'resume'), " makes the case in one page."],
+      ["I'm biased, but so is the evidence. ", P('Teen safety', '2011-1760'), ", ", P('climate science', '2011-1303'), ", ", P('AI growth', '2010-1171'), ": very different problems, same result. She'd make your team better on day one. ", L('Send her a note', 'contact'), "."]
+    )],
+    [/strength|good at|stand out|unique|best/, ["She designs for real-world outcomes and earns trust quickly across very different domains: ", P('AI growth', '2010-1171'), ", ", P('teen safety', '2011-1760'), ", ", P('climate science', '2011-1303'), ", and ", P('fundraising', '2011-1381'), ". She also builds her own tools, like a ", P('growth copy generator', '1-1155'), ". ", RES]],
+    [/content design/, ["Content design is designing with words and structure: what a product says, when it says it, and how it's organized, so people can get things done. See how Jenny does it: ", CD]],
+    [/model (design|behavior|behaviour)|prompt|eval/, ["Model design treats the model itself as the product: shaping its voice, its judgment, and how honestly it explains what it can and can't do, in close partnership with researchers and evals. See how Jenny approaches it: ", MD]],
+    [/resume|cv|experience|background|meta/, ["Nearly a decade at Meta, most recently at Meta Superintelligence Labs. ", RES]],
+    [/portfolio|project|\bwork\b/, ["There are two portfolios: ", L('content design', 'content'), " and ", L('model design', 'model'), "."]],
+    [/contact|email|hire|reach|linkedin|job|role|available|open to/, V(
+      ["Jenny is open to content design and model design roles. ", CT],
+      ["She's actively talking with teams about content and model design roles, so now's a great time. ", L('Send her a note', 'contact'), "."],
+      ["The easiest way to reach her is email. It's all on the ", L('contact card', 'contact'), "."]
+    )],
+    [/who|about|jenny|yourself/, ["Jenny is a content and model designer in San Francisco. ", RES, " or ", L('get in touch', 'contact'), "."]],
+    [/typewriter|machine|keyboard|notebook|desk|laptop|sticker|dog|jax/, ["Click Jenny's name to switch desks. Same Jenny, different desk. While you're here: ", CD]],
+    [/thank|thanks|cool|nice|love/, ["Thanks for stopping by. Jenny would love to hear from you. ", CT]]
+  ];
+  const FALLBACK = ["I don't have an answer for that one yet. The best next step is the ", L('resume', 'resume'), ", a ", L('portfolio', 'content'), ", or ", L('getting in touch', 'contact'), "."];
+  const FALLBACKS = [
+    ["Good question, and not one I was trained on. What I can tell you: Jenny's best work sits where language meets high stakes, like ", P('teen safety', '2011-1760'), " and ", P('AI products', '2010-1153'), ". Try asking about either, or ", L('ask Jenny directly', 'contact'), "."],
+    ["That one's outside my notes. Want a shortcut instead? Her ", P('donation matching work', '2011-1407'), " raised up to 65% more for fundraisers, and it's a two-minute read. Or ", L('browse the whole portfolio', 'content'), "."],
+    ["I'm a small, scripted guide, so I'll pass on that one. Jenny, though, could answer it over coffee. ", CT, " Meanwhile, here's her ", P('decade in AI', '1-1001'), "."],
+    ["Hmm, I don't have that. I do know she once turned IPCC climate science into plain language for millions of people, if that helps. ", S('See the climate work', '2011-1303')],
+    ["Not in my notes, but here's something that is: she built an AI tool that writes and ranks copy for her whole team. ", S('See the copy generator', '1-1155')],
+    ["I'll be honest: I can't answer that. Try asking about her strengths, her process, or her AI work. Or skip the middleman and ", L('see the resume', 'resume'), "."]
+  ];
+  let fbi = Math.floor(Math.random() * 6);
+  const nextFallback = () => FALLBACKS[(fbi++) % FALLBACKS.length];
+  const ASKS = ['What is content design?', 'What is model design?', 'Show me an example', "Jenny's content design work", "Jenny's model design work", 'How do I reach Jenny?'];
+  const scroller = sheet;
+  function scrollDown() { scroller.scrollTop = scroller.scrollHeight; }
+  async function typeInto(el, text) {
+    if (reduce) { el.textContent += text; scrollDown(); return; }
+    for (let i = 0; i < text.length; i++) {
+      el.textContent += text[i];
+      if (text[i] !== ' ' && i % 2 === 0) { clack(.6); if (i % 4 === 0) strike(); }
+      if (i % 6 === 0) scrollDown();
+      await sleep(text[i] === '.' || text[i] === ',' ? 70 : 16 + Math.random() * 18);
+    }
+    scrollDown();
+  }
+  async function reply(segs) {
+    const p = document.createElement('p'); typed.appendChild(p);
+    for (const s of segs) {
+      if (typeof s === 'string') { const span = document.createElement('span'); p.appendChild(span); await typeInto(span, s); }
+      else if (s.ex) { const span = document.createElement('span'); span.className = 'ex'; p.appendChild(span); await typeInto(span, '– ' + s.ex); }
+      else { const b = linkFor(s); p.appendChild(b); await typeInto(b, s.t + (s.inline || /^(content design|model design|the resume|resume|portfolio|getting in touch|get in touch|content design portfolio)$/.test(s.t) ? '' : ' →')); }
+    }
+    bell();
+  }
+  async function send() {
+    const text = input.value.trim(); if (!text || busy) return;
+    busy = true; input.value = ''; input.placeholder = '';
+    const q = document.createElement('p'); q.className = 'q'; q.textContent = '> ' + text; typed.appendChild(q); scrollDown();
+    const r = RULES.find(([re]) => re.test(text.toLowerCase()));
+    await sleep(reduce ? 0 : 280);
+    await reply(vary(r));
+    busy = false; if (fine) input.focus({ preventScroll: true });
+  }
+  async function autoType(q) {
+    if (busy) return; input.value = '';
+    for (const ch of q) { input.value += ch; press(keyEls[ch.toLowerCase()]); clack(); strike(); if (!reduce) await sleep(38); }
+    await sleep(reduce ? 0 : 150); send();
+  }
+
+  /* ---------- Machine color ---------- */
+  document.querySelectorAll('.swatches button').forEach(b => b.addEventListener('click', () => {
+    body.classList.remove('oxblood', 'cream'); if (b.dataset.color !== 'sage') body.classList.add(b.dataset.color);
+    document.querySelectorAll('.swatches button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    try { localStorage.setItem('machine', b.dataset.color); } catch (e) {}
+  }));
+  try { const c = localStorage.getItem('machine'); if (c) { const b = document.querySelector(`.swatches [data-color="${c}"]`); if (b) b.click(); } } catch (e) {}
+
+  /* ---------- Notebook ---------- */
+  const nb = $('#notebook'), nbLog = $('#nb-log'), nbInput = $('#nb-input');
+  let nbBusy = false;
+  const nbDown = () => { nbLog.scrollTop = nbLog.scrollHeight; };
+  async function writeInto(el, text) {
+    const parts = text.split(/(\s+)/);
+    for (const part of parts) {
+      if (!part) continue;
+      if (/^\s+$/.test(part)) { if (part.includes('\n')) el.appendChild(document.createElement('br')); else el.appendChild(document.createTextNode(' ')); continue; }
+      const w = document.createElement('span'); w.className = 'w'; el.appendChild(w);
+      for (const ch of part) {
+        const c = document.createElement('span'); c.className = 'c'; c.textContent = ch;
+        c.style.setProperty('--y', ((Math.random() - .5) * 1.4).toFixed(2) + 'px'); w.appendChild(c);
+        if (!reduce) await sleep(20 + Math.random() * 22);
+      }
+      nbDown();
+    }
+  }
+  async function nbReply(segs) {
+    const p = document.createElement('p'); p.className = 'hand nb-a'; nbLog.appendChild(p);
+    for (const s of segs) {
+      if (typeof s === 'string') await writeInto(p, s);
+      else if (s.ex) { const span = document.createElement('span'); span.className = 'ex'; p.appendChild(span); await writeInto(span, '– ' + s.ex); }
+      else { const b = linkFor(s); p.appendChild(b); await writeInto(b, s.t); }
+    }
+    nbDown();
+  }
+  $('#nb-form').addEventListener('submit', async e => {
+    e.preventDefault(); const text = nbInput.value.trim(); if (!text || nbBusy) return;
+    nbBusy = true; nbInput.value = '';
+    const q = document.createElement('p'); q.className = 'nb-q'; q.textContent = text; nbLog.appendChild(q); nbDown();
+    const r = RULES.find(([re]) => re.test(text.toLowerCase()));
+    await sleep(reduce ? 0 : 350);
+    await nbReply(vary(r));
+    nbBusy = false; if (fine) nbInput.focus({ preventScroll: true });
+  });
+  function fitNotebook() {
+    const narrow = innerWidth <= 1060, H = innerHeight - 52;
+    const pad = Math.min(40, Math.max(20, innerWidth * .026));
+    const col = narrow ? innerWidth - 2 * pad : innerWidth - 2 * 210 - 4 * pad - 80;
+    const w = narrow ? col : Math.min(col, (H - 90) * 1.52, 1180) * .8;
+    nb.style.setProperty('--nbw', Math.max(300, w).toFixed(0) + 'px');
+  }
+  addEventListener('resize', fitNotebook);
+
+  /* ---------- Laptop ---------- */
+  const lap = $('#laptop'), lpLog = $('#lp-log'), lpInput = $('#lp-input'), lpDeck = $('#lp-deck');
+  const lpKeys = {};
+  const LROWS = [
+    ['`','1','2','3','4','5','6','7','8','9','0','-','=',{k:'Backspace',t:'delete',w:1.55,r:1}],
+    [{k:'Tab',t:'tab',w:1.55},'q','w','e','r','t','y','u','i','o','p','[',']','\\'],
+    [{k:'CapsLock',t:'caps',w:1.8},'a','s','d','f','g','h','j','k','l',';',"'",{k:'Enter',t:'return',w:1.8,r:1}],
+    [{k:'Shift',t:'shift',w:2.35},'z','x','c','v','b','n','m',',','.','/',{k:'Shift',t:'shift',w:2.35,r:1}],
+    [{k:' ',t:'',w:6.2}]
+  ];
+  const LSHIFT = {'`':'~','1':'!','2':'@','3':'#','4':'$','5':'%','6':'^','7':'&','8':'*','9':'(','0':')','-':'_','=':'+','[':'{',']':'}','\\':'|',';':':',"'":'"',',':'<','.':'>','/':'?'};
+  LROWS.forEach(r => {
+    const row = document.createElement('div'); row.className = 'lp-row';
+    r.forEach(x => {
+      const d = typeof x === 'string' ? { k: x } : x;
+      const b = document.createElement('button'); b.type = 'button'; b.tabIndex = -1; b.className = 'lk';
+      if (d.w) b.style.setProperty('--w', d.w);
+      if (d.k.length > 1) { b.classList.add('mod'); if (d.r) b.classList.add('r'); b.textContent = d.t; }
+      else if (d.k === ' ') b.textContent = '';
+      else b.innerHTML = /[a-z]/.test(d.k) ? d.k.toUpperCase() : `<small>${LSHIFT[d.k] || ''}</small>${d.k}`;
+      b.dataset.k = d.k; (lpKeys[d.k.toLowerCase()] = lpKeys[d.k.toLowerCase()] || []).push(b);
+      row.appendChild(b);
+    });
+    lpDeck.appendChild(row);
+  });
+  let lpShift = false, lpCaps = false, lpBusy = false;
+  const lpMods = () => { (lpKeys.shift || []).forEach(b => b.classList.toggle('on', lpShift)); (lpKeys.capslock || []).forEach(b => b.classList.toggle('on', lpCaps)); };
+  lpDeck.addEventListener('pointerdown', ev => {
+    const b = ev.target.closest('.lk'); if (!b) return; ev.preventDefault(); press([b]);
+    const k = b.dataset.k, s0 = lpInput.selectionStart ?? lpInput.value.length, e0 = lpInput.selectionEnd ?? s0;
+    if (k === 'Backspace') { if (s0 !== e0) lpInput.setRangeText('', s0, e0, 'end'); else if (s0 > 0) lpInput.setRangeText('', s0 - 1, s0, 'end'); }
+    else if (k === 'Enter') $('#lp-form').requestSubmit();
+    else if (k === 'Shift') { lpShift = !lpShift; lpMods(); }
+    else if (k === 'CapsLock') { lpCaps = !lpCaps; lpMods(); }
+    else if (k !== 'Tab') {
+      let ch = k; if (/[a-z]/.test(k)) ch = (lpShift !== lpCaps) ? k.toUpperCase() : k; else if (lpShift && LSHIFT[k]) ch = LSHIFT[k];
+      if (lpInput.value.length < 120) lpInput.setRangeText(ch, s0, e0, 'end');
+      if (lpShift) { lpShift = false; lpMods(); }
+    }
+    if (fine) lpInput.focus({ preventScroll: true });
+  });
+  lpInput.addEventListener('keydown', e => press(lpKeys[e.key === ' ' ? ' ' : e.key.toLowerCase()]));
+  const lpDown = () => { lpLog.scrollTop = lpLog.scrollHeight; };
+  async function streamInto(el, text) {
+    const parts = text.split(/(\s+)/);
+    for (const part of parts) {
+      if (!part) continue;
+      if (/^\s+$/.test(part)) { el.appendChild(part.includes('\n') ? document.createElement('br') : document.createTextNode(' ')); continue; }
+      const w = document.createElement('span'); w.className = 'wd'; w.textContent = part; el.appendChild(w);
+      if (!reduce) await sleep(28 + Math.random() * 40);
+      lpDown();
+    }
+  }
+  $('#lp-form').addEventListener('submit', async e => {
+    e.preventDefault(); const text = lpInput.value.trim(); if (!text || lpBusy) return;
+    lpBusy = true; lpInput.value = '';
+    const q = document.createElement('p'); q.className = 'lp-q'; q.textContent = text; lpLog.appendChild(q); lpDown();
+    const r = RULES.find(([re]) => re.test(text.toLowerCase()));
+    await sleep(reduce ? 0 : 450);
+    const p = document.createElement('p'); p.className = 'lp-a'; lpLog.appendChild(p);
+    for (const s of (vary(r))) {
+      if (typeof s === 'string') await streamInto(p, s);
+      else if (s.ex) { const span = document.createElement('span'); span.className = 'ex'; p.appendChild(span); await streamInto(span, s.ex); }
+      else { const b = linkFor(s); p.appendChild(b); await streamInto(b, s.t); }
+    }
+    lpDown(); lpBusy = false; if (fine) lpInput.focus({ preventScroll: true });
+  });
+  function fitLaptop() {
+    const narrow = innerWidth <= 1060, H = innerHeight - 52;
+    const pad = Math.min(40, Math.max(20, innerWidth * .026));
+    const col = narrow ? innerWidth - 2 * pad : innerWidth - 2 * 210 - 4 * pad;
+    const lu = Math.max(22, Math.min(58, col / 16.8, (H - 50) / 13.4));
+    lap.style.setProperty('--lu', lu.toFixed(1) + 'px');
+  }
+  addEventListener('resize', fitLaptop);
+
+  /* ---------- Switching desks ---------- */
+  const stage = $('#stage'), swap = $('#swap'), nudge = $('#nudge');
+  const ORDER = ['tw', 'nb', 'lp'];
+  let current = 'tw';
+  function setWorld(w, save = true) {
+    if (!ORDER.includes(w)) w = 'tw';
+    current = w;
+    body.classList.toggle('w-nb', w === 'nb'); body.classList.toggle('w-lp', w === 'lp');
+    if (save) { try { localStorage.setItem('world', w); } catch (e) {} }
+    if (w === 'nb') fitNotebook(); else if (w === 'lp') fitLaptop(); else fit();
+    const target = w === 'nb' ? nbInput : w === 'lp' ? lpInput : input;
+    if (fine) target.focus({ preventScroll: true });
+  }
+  swap.addEventListener('click', () => {
+    const next = ORDER[(ORDER.indexOf(current) + 1) % ORDER.length];
+    nudge.classList.remove('show'); try { localStorage.setItem('swapped', '1'); } catch (e) {}
+    if (reduce) { setWorld(next); return; }
+    stage.classList.add('swapping');
+    setTimeout(() => { setWorld(next); stage.classList.remove('swapping'); }, 280);
+  });
+  let swapped = false; try { swapped = localStorage.getItem('swapped') === '1'; } catch (e) {}
+  if (!swapped) setTimeout(() => nudge.classList.add('show'), 12000);
+  setTimeout(() => { if (matchMedia('(min-width:641px)').matches) { swap.classList.add('tip-on'); setTimeout(() => swap.classList.remove('tip-on'), 5000); } }, 1500);
+
+
+  let startWorld = 'tw'; try { startWorld = localStorage.getItem('world') || 'tw'; } catch (e) {}
+  fit(); fitNotebook(); fitLaptop();
+  setWorld(startWorld, false);
+})();
+</script>
+
 </body>
 </html>
