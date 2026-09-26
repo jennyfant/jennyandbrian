@@ -48,6 +48,16 @@
     .pencil.mech:hover{transform:rotate(-12deg) translateY(-10px)}
     .pencil.golf:hover{transform:rotate(16deg) translateY(calc(6% - 10px))}
   }
+  .pencil{position:relative}
+  .pencil .dot{position:absolute; left:50%; width:13px; height:13px; margin-left:-6.5px; border-radius:50%;
+    background:#E4674A; box-shadow:0 0 0 3px rgba(253,252,248,.7); opacity:0; transform:scale(.4); transition:opacity .3s ease, transform .3s ease}
+  .pencil.mech .dot{top:0}
+  .pencil.golf .dot{top:27%}
+  .pencil.has-new .dot{opacity:1; transform:scale(1); animation:beat 2.4s ease-in-out infinite}
+  @keyframes beat{0%,100%{box-shadow:0 0 0 3px rgba(253,252,248,.7), 0 0 0 0 rgba(228,103,74,.45)}50%{box-shadow:0 0 0 3px rgba(253,252,248,.7), 0 0 0 9px rgba(228,103,74,0)}}
+  #padBtn{position:fixed}
+  #padBtn .pdot{position:absolute; top:6px; right:6px; width:9px; height:9px; border-radius:50%; background:#E4674A; opacity:0; transition:opacity .3s ease}
+  #padBtn.has-new .pdot{opacity:1}
   .pencil:focus-visible{outline:2px solid var(--ink-soft); outline-offset:4px}
   #pick.going .pencil{opacity:0; pointer-events:none}
   #pick.going .pencil.chosen.mech{transform:rotate(-40deg) translate(-40px,-60vh)}
@@ -59,7 +69,19 @@
     padding-inline:24px 56px; padding-block:clamp(40px,12vh,110px) 40vh; opacity:0; transition:opacity .6s ease .15s}
   #page{transition:opacity .6s ease .15s, transform .35s ease}
   #page.on{opacity:1}
-  .their{margin:0 0 clamp(36px,8vh,64px); white-space:pre-wrap; overflow-wrap:anywhere}
+  .their{margin:0 0 28px; white-space:pre-wrap; overflow-wrap:anywhere}
+  #page{display:flex; flex-direction:column; align-items:center}
+  .paper{position:relative; width:min(calc(100vw - 104px), 330px); aspect-ratio:2/3;
+    background:#fdfcf8; color:#2A2418; padding:34px 24px 26px; border-radius:1px 1px 3px 3px;
+    box-shadow:0 1px 1px rgba(40,30,20,.08), 0 14px 28px -10px rgba(40,30,20,.45), 0 2px 6px rgba(40,30,20,.12);
+    transform:rotate(-.8deg);
+    --ink:#2A2418; --ink-soft:rgba(42,36,24,.5)}
+  .paper::before{content:""; position:absolute; left:0; right:0; top:-3px; height:7px;
+    background:radial-gradient(circle at 5px 0, transparent 3px, #fdfcf8 3.5px) 0 0/10px 7px repeat-x}
+  .paper .hand-jenny{font-size:clamp(22px,5.6vw,28px); line-height:1.4}
+  .paper .hand-him{font-size:clamp(19px,4.8vw,24px); line-height:1.65}
+  .paper #sentMark span{font-size:clamp(19px,4.6vw,23px)}
+  @media (min-width:720px){ .paper{width:360px} }
   .when{display:block; font-family:ui-sans-serif, system-ui, -apple-system, sans-serif; font-size:12px; color:var(--ink-soft); margin-top:10px; letter-spacing:.02em}
   .hand-jenny{font-family:var(--hand-jenny); font-size:clamp(28px,6.6vw,40px); line-height:1.45}
   .hand-him{font-family:var(--hand-him); font-size:clamp(25px,5.8vw,35px); line-height:1.7}
@@ -67,6 +89,20 @@
     background:transparent; border:0; outline:none; padding:0; margin:0; color:var(--ink); caret-color:var(--ink); min-height:1.7em}
   textarea{transition:transform .6s cubic-bezier(.3,.7,.2,1), opacity .55s ease}
   textarea.sent{transform:translateY(-36px); opacity:0}
+  textarea.sending{opacity:.45; transition:opacity .25s ease}
+  textarea.nope{animation:shake .38s ease}
+  .mineWrap{position:relative}
+  #sentMark{position:absolute; left:0; top:.2em; display:flex; align-items:center; gap:12px; pointer-events:none; color:var(--ink)}
+  #sentMark svg{width:34px; height:26px; overflow:visible; flex:none}
+  #sentMark path{fill:none; stroke:currentColor; stroke-width:3.2; stroke-linecap:round; stroke-linejoin:round;
+    stroke-dasharray:60; stroke-dashoffset:60}
+  #sentMark span{opacity:0; font-size:clamp(21px,5vw,26px)}
+  #sentMark.on path{animation:draw .5s cubic-bezier(.5,0,.3,1) .05s forwards}
+  #sentMark.on span{animation:inkIn .45s ease .35s forwards}
+  #sentMark.out{opacity:0; transition:opacity .5s ease}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  @keyframes inkIn{from{opacity:0; transform:translateX(-4px)}to{opacity:.85; transform:none}}
+  @media (prefers-reduced-motion: reduce){ #sentMark path{stroke-dashoffset:0} #sentMark span{opacity:.85} }
   #padBtn{position:fixed; right:calc(12px + env(safe-area-inset-right,0px)); top:50%; transform:translateY(-50%); z-index:20;
     background:transparent; border:0; padding:10px; color:var(--ink); opacity:.5; cursor:pointer; line-height:0; transition:opacity .2s ease, transform .2s ease}
   #padBtn:hover, #padBtn:focus-visible{opacity:.9}
@@ -77,21 +113,21 @@
   #archive.on{opacity:1}
   #archList{list-style:none; margin:0 auto; max-width:600px; box-sizing:border-box;
     padding-inline:20px 64px; padding-block:calc(48px + env(safe-area-inset-top,0px)) 80px; display:flex; flex-direction:column; gap:18px}
-  #archList li.item{position:relative; border-radius:14px; overflow:hidden; background:#b4432c;
+  #archList li.item{position:relative; border-radius:2px; overflow:hidden; background:#b4432c; box-shadow:0 1px 1px rgba(40,30,20,.08), 0 10px 20px -10px rgba(40,30,20,.45);
     transition:height .3s ease, opacity .3s ease, margin .3s ease}
   #archList li.item::after{content:"Delete"; position:absolute; right:22px; top:50%; transform:translateY(-50%);
     font-family:ui-sans-serif, system-ui, -apple-system, sans-serif; font-size:14px; font-weight:600; color:#fff4ee; z-index:0}
-  #archList .card{position:relative; z-index:1; padding:18px 20px 20px; background-size:cover; background-position:center;
-    box-shadow:inset 0 0 0 999px rgba(250,247,240,.5); touch-action:pan-y; user-select:none; -webkit-user-select:none; cursor:grab;
+  #archList .card{position:relative; z-index:1; padding:20px 20px 20px; background:#fdfcf8 !important;
+    box-shadow:none; touch-action:pan-y; user-select:none; -webkit-user-select:none; cursor:grab;
     transition:transform .3s cubic-bezier(.2,.8,.2,1)}
   #archList .card:focus-visible{outline:2px solid var(--ink-soft); outline-offset:-4px; border-radius:14px}
   #archList .date{display:block; font-family:ui-sans-serif, system-ui, -apple-system, sans-serif; font-size:12px; letter-spacing:.02em; color:rgba(42,36,24,.55); margin-bottom:8px}
   #archList .txt{margin:0; white-space:pre-wrap; overflow-wrap:anywhere; color:#2A2418}
-  #archList .hand-jenny{font-size:clamp(23px,5.4vw,30px)}
-  #archList .hand-him{font-size:clamp(21px,4.8vw,26px)}
-  #archList .card.dark{box-shadow:inset 0 0 0 999px rgba(20,18,16,.3)}
-  #archList .card.dark .txt{color:#F3ECDF}
-  #archList .card.dark .date{color:rgba(243,236,223,.65)}
+  #archList .hand-jenny{font-size:clamp(21px,5vw,26px)}
+  #archList .hand-him{font-size:clamp(18px,4.4vw,22px)}
+  #archList li.item:nth-child(odd){transform:rotate(-.6deg)}
+  #archList li.item:nth-child(even){transform:rotate(.5deg)}
+  #archList .hint{list-style:none; text-align:center; font-family:ui-sans-serif, system-ui, -apple-system, sans-serif; font-size:12px; letter-spacing:.03em; color:var(--ink-soft); margin-bottom:-4px}
   #archList .none{font-family:ui-sans-serif, system-ui, sans-serif; font-size:14px; color:var(--ink-soft); padding:0}
   .toast{position:fixed; left:50%; bottom:calc(20px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%);
     font-size:12px; color:var(--ink-soft); z-index:25; display:flex; gap:12px; align-items:center; white-space:nowrap}
@@ -106,16 +142,21 @@
 <div id="lock" hidden><input id="code" type="password" inputmode="text" autocomplete="current-password" enterkeyhint="go" aria-label="Passcode" spellcheck="false"></div>
 
 <div id="pick">
-  <button class="pencil mech" id="pickJenny" type="button" aria-label="Write as Jenny"><svg viewBox="0 0 60 400" aria-hidden="true"><rect x="22" y="8" width="16" height="15" rx="3" fill="#f3f1ec" stroke="#cfc9be"/><rect x="20" y="21" width="20" height="26" rx="3" fill="#26282b"/><rect x="19" y="45" width="22" height="249" rx="4" fill="rgba(226,231,233,.9)" stroke="rgba(55,64,70,.38)"/><rect x="28" y="50" width="4" height="238" rx="2" fill="rgba(55,62,66,.4)"/><rect x="22" y="52" width="3" height="232" rx="1.5" fill="rgba(255,255,255,.7)"/><rect x="38" y="78" width="5" height="14" rx="1.5" fill="#6f9a3a"/><rect x="40" y="82" width="9" height="74" rx="2.5" fill="#8fbd4e"/><g transform="translate(30.5 228) rotate(-90)" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" letter-spacing="2.4" text-anchor="middle" dominant-baseline="central"><text y="0.7" fill="rgba(255,255,255,.75)">JENNY</text><text fill="rgba(38,44,48,.62)">JENNY</text></g><rect x="18" y="292" width="24" height="60" rx="5" fill="#2a2c2f"/><g stroke="#474a52" stroke-width="1.4"><line x1="20" y1="302" x2="40" y2="302"/><line x1="20" y1="309" x2="40" y2="309"/><line x1="20" y1="316" x2="40" y2="316"/><line x1="20" y1="323" x2="40" y2="323"/><line x1="20" y1="330" x2="40" y2="330"/><line x1="20" y1="337" x2="40" y2="337"/></g><path d="M18 350 L42 350 L33.5 384 L26.5 384 Z" fill="#2a2c2f"/><rect x="28.8" y="384" width="2.4" height="9" fill="#9aa0a5"/><rect x="29.4" y="393" width="1.2" height="5" fill="#3a3a3a"/></svg></button>
-  <button class="pencil golf" id="pickHim" type="button" aria-label="Write as Brian"><svg viewBox="0 0 60 400" aria-hidden="true"><rect x="19" y="120" width="22" height="24" rx="6" fill="#e8897c"/><rect x="18" y="140" width="24" height="31" fill="#c7a246"/><g stroke="#a3822f" stroke-width="1.4"><line x1="18" y1="147" x2="42" y2="147"/><line x1="18" y1="152" x2="42" y2="152"/><line x1="18" y1="159" x2="42" y2="159"/><line x1="18" y1="164" x2="42" y2="164"/></g><rect x="22" y="140" width="3" height="31" fill="rgba(255,240,190,.55)"/><rect x="18" y="171" width="24" height="170" fill="#2f5d39"/><rect x="18" y="171" width="7" height="170" fill="#3d734a"/><rect x="34" y="171" width="8" height="170" fill="#244a2d"/><g transform="translate(30 256) rotate(-90)" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="11.5" font-weight="700" letter-spacing="2.6" text-anchor="middle" dominant-baseline="central"><text y="0.6" fill="rgba(0,0,0,.35)">BRIAN</text><text fill="#e2c46e">BRIAN</text></g><path d="M18 341 L42 341 L33.4 378 L26.6 378 Z" fill="#e8c898"/><path d="M18 341 q3 5 6 0 q3 5 6 0 q3 5 6 0 q3 5 6 0 L42 341 Z" fill="#2f5d39"/><path d="M26.6 378 L33.4 378 L30 392 Z" fill="#4b4b4d"/></svg></button>
+  <button class="pencil mech" id="pickJenny" type="button" aria-label="Write as Jenny"><span class="dot" aria-hidden="true"></span><svg viewBox="0 0 60 400" aria-hidden="true"><rect x="22" y="8" width="16" height="15" rx="3" fill="#f3f1ec" stroke="#cfc9be"/><rect x="20" y="21" width="20" height="26" rx="3" fill="#26282b"/><rect x="19" y="45" width="22" height="249" rx="4" fill="rgba(226,231,233,.9)" stroke="rgba(55,64,70,.38)"/><rect x="28" y="50" width="4" height="238" rx="2" fill="rgba(55,62,66,.4)"/><rect x="22" y="52" width="3" height="232" rx="1.5" fill="rgba(255,255,255,.7)"/><rect x="38" y="78" width="5" height="14" rx="1.5" fill="#6f9a3a"/><rect x="40" y="82" width="9" height="74" rx="2.5" fill="#8fbd4e"/><g transform="translate(30.5 228) rotate(-90)" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" letter-spacing="2.4" text-anchor="middle" dominant-baseline="central"><text y="0.7" fill="rgba(255,255,255,.75)">JENNY</text><text fill="rgba(38,44,48,.62)">JENNY</text></g><rect x="18" y="292" width="24" height="60" rx="5" fill="#2a2c2f"/><g stroke="#474a52" stroke-width="1.4"><line x1="20" y1="302" x2="40" y2="302"/><line x1="20" y1="309" x2="40" y2="309"/><line x1="20" y1="316" x2="40" y2="316"/><line x1="20" y1="323" x2="40" y2="323"/><line x1="20" y1="330" x2="40" y2="330"/><line x1="20" y1="337" x2="40" y2="337"/></g><path d="M18 350 L42 350 L33.5 384 L26.5 384 Z" fill="#2a2c2f"/><rect x="28.8" y="384" width="2.4" height="9" fill="#9aa0a5"/><rect x="29.4" y="393" width="1.2" height="5" fill="#3a3a3a"/></svg></button>
+  <button class="pencil golf" id="pickHim" type="button" aria-label="Write as Brian"><span class="dot" aria-hidden="true"></span><svg viewBox="0 0 60 400" aria-hidden="true"><rect x="19" y="120" width="22" height="24" rx="6" fill="#e8897c"/><rect x="18" y="140" width="24" height="31" fill="#c7a246"/><g stroke="#a3822f" stroke-width="1.4"><line x1="18" y1="147" x2="42" y2="147"/><line x1="18" y1="152" x2="42" y2="152"/><line x1="18" y1="159" x2="42" y2="159"/><line x1="18" y1="164" x2="42" y2="164"/></g><rect x="22" y="140" width="3" height="31" fill="rgba(255,240,190,.55)"/><rect x="18" y="171" width="24" height="170" fill="#2f5d39"/><rect x="18" y="171" width="7" height="170" fill="#3d734a"/><rect x="34" y="171" width="8" height="170" fill="#244a2d"/><g transform="translate(30 256) rotate(-90)" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="11.5" font-weight="700" letter-spacing="2.6" text-anchor="middle" dominant-baseline="central"><text y="0.6" fill="rgba(0,0,0,.35)">BRIAN</text><text fill="#e2c46e">BRIAN</text></g><path d="M18 341 L42 341 L33.4 378 L26.6 378 Z" fill="#e8c898"/><path d="M18 341 q3 5 6 0 q3 5 6 0 q3 5 6 0 q3 5 6 0 L42 341 Z" fill="#2f5d39"/><path d="M26.6 378 L33.4 378 L30 392 Z" fill="#4b4b4d"/></svg></button>
 </div>
 
 <main id="page" hidden>
+ <div class="paper" id="paper">
   <p class="their" id="their" hidden></p>
-  <textarea id="mine" rows="1" enterkeyhint="send" aria-label="Your note" spellcheck="false" autocomplete="off"></textarea>
+  <div class="mineWrap">
+    <textarea id="mine" rows="1" enterkeyhint="send" aria-label="Your note" spellcheck="false" autocomplete="off"></textarea>
+    <div id="sentMark" role="status" hidden><svg viewBox="0 0 40 30" aria-hidden="true"><path d="M3 17 C7 20 10 23 14 27 C20 18 27 10 37 3"/></svg><span></span></div>
+  </div>
+ </div>
 </main>
 
-<button id="padBtn" type="button" aria-label="All notes" title="All notes"><svg viewBox="0 0 24 30" width="22" height="28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="24" rx="2"/><path d="M2.5 7.5h19"/><path d="M6.5 1.8v3.4M10.2 1.8v3.4M13.8 1.8v3.4M17.5 1.8v3.4"/><path d="M6 12.5h12M6 16.5h12M6 20.5h8"/></svg></button>
+<button id="padBtn" type="button" aria-label="All notes" title="All notes"><span class="pdot" aria-hidden="true"></span><svg viewBox="0 0 24 30" width="22" height="28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="24" rx="2"/><path d="M2.5 7.5h19"/><path d="M6.5 1.8v3.4M10.2 1.8v3.4M13.8 1.8v3.4M17.5 1.8v3.4"/><path d="M6 12.5h12M6 16.5h12M6 20.5h8"/></svg></button>
 
 <section id="archive" hidden aria-label="All notes">
   <ol id="archList"></ol>
@@ -126,7 +167,7 @@
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, collection as fsCollection, doc as fsDoc, addDoc, setDoc, deleteDoc, onSnapshot as fsOnSnapshot, query, orderBy as fsOrderBy, limit as fsLimit } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection as fsCollection, doc as fsDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot as fsOnSnapshot, query, orderBy as fsOrderBy, limit as fsLimit } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 // ---- Your Firebase project (from Firebase console > Project settings > Your apps)
 const FIREBASE = {
@@ -191,7 +232,18 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
     if (dbState === "off") return EXAMPLE[me].text && !(typeof pendingDeletes !== "undefined" && pendingDeletes.has(EXAMPLE[me].at)) ? EXAMPLE[me] : null;
     return notes.find(n => n.from === other(me) && (n.text||"").trim() && !(typeof pendingDeletes !== "undefined" && pendingDeletes.has(n.id))) || null;
   }
+  function latestFrom(who){ return notes.find(n => n.from === who && (n.text||"").trim() && !(typeof pendingDeletes !== "undefined" && pendingDeletes.has(n.id))); }
+  function unreadFor(who){ const n = dbState === "on" ? latestFrom(other(who)) : null; return !!(n && !n.readAt); }
+  function updateBadges(){
+    $("pickJenny").classList.toggle("has-new", unreadFor("jenny"));
+    $("pickHim").classList.toggle("has-new", unreadFor("him"));
+    $("pickJenny").setAttribute("aria-label", "Write as Jenny" + (unreadFor("jenny") ? " (new note from Brian)" : ""));
+    $("pickHim").setAttribute("aria-label", "Write as Brian" + (unreadFor("him") ? " (new note from Jenny)" : ""));
+    $("padBtn").classList.toggle("has-new", !!me && unreadFor(me));
+  }
+  const marking = new Set();
   function renderTheirs(){
+    updateBadges();
     if (!me) return;
     const n = theirLatest(), el = $("their");
     if (!n){ el.hidden = true; return; }
@@ -200,6 +252,10 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
     const w = document.createElement("span"); w.className = "when"; w.textContent = when(n.updatedAt || n.at);
     el.append(w);
     el.hidden = false;
+    if (dbState === "on" && n.id && !n.readAt && !marking.has(n.id)){
+      marking.add(n.id);
+      db.doc("notes/" + n.id).update({ readAt: Date.now() }).catch(() => marking.delete(n.id));
+    }
   }
 
   // ---- your note: Return sends it
@@ -208,26 +264,41 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
   const store = { get(k){ try{ return localStorage.getItem(k) }catch(e){ return null } },
                   set(k,v){ try{ localStorage.setItem(k,v) }catch(e){} } };
   function grow(){ mine.style.height = "auto"; mine.style.height = mine.scrollHeight + "px"; }
+  let markTimer = null;
+  function showSent(){
+    const m = $("sentMark"), who = me === "jenny" ? "Brian" : "Jenny";
+    m.querySelector("span").textContent = "left for " + who;
+    m.querySelector("span").className = "hand-" + me;
+    clearTimeout(markTimer);
+    m.classList.remove("on","out"); m.hidden = false; void m.offsetWidth; m.classList.add("on");
+    try{ navigator.vibrate && navigator.vibrate(12); }catch(_){}
+    markTimer = setTimeout(() => { m.classList.add("out"); markTimer = setTimeout(() => { m.hidden = true; m.classList.remove("on","out"); }, 520); }, 1800);
+  }
   async function send(){
     const text = mine.value.trim();
     if (!text || sending) return;
     if (!db){ toast(dbState === "pending" ? "One second, still opening your notes." : "Notes can't be saved until notepad is connected."); return; }
     sending = true;
+    mine.classList.add("sending");
     try{
       await db.collection("notes").add({from: me, text, texture: tex, at: Date.now()});
       store.set("np.draft." + me, "");
+      mine.classList.remove("sending");
       mine.classList.add("sent");
       setTimeout(() => {
         mine.value = ""; grow();
         mine.classList.remove("sent");
+        showSent();
         mine.focus({preventScroll:true});
-        toast("left for " + (me === "jenny" ? "Brian" : "Jenny"));
-      }, 650);
+      }, 450);
     }catch(e){
+      mine.classList.remove("sending");
+      mine.classList.remove("nope"); void mine.offsetWidth; mine.classList.add("nope");
       toast(e && e.code === "permission-denied" ? "Not signed in. Reload and enter the passcode." : "Didn't send. Press Return to try again.");
     }
     sending = false;
   }
+  mine.addEventListener("input", () => { const m = $("sentMark"); if (!m.hidden){ clearTimeout(markTimer); m.hidden = true; m.classList.remove("on","out"); } });
   mine.addEventListener("keydown", e => {
     if (e.key === "Enter" && !e.shiftKey && !e.isComposing){ e.preventDefault(); send(); }
   });
@@ -274,12 +345,13 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
       li.textContent = dbState === "pending" ? "Opening your notes\u2026" : "No notes yet.";
       list.append(li); return;
     }
+    const hint = document.createElement("li"); hint.className = "hint";
+    hint.textContent = matchMedia("(hover: none)").matches ? "\u2193 pull down to go back" : "press esc to go back";
+    list.append(hint);
     for (const n of all){
       const li = document.createElement("li"); li.className = "item";
       const card = document.createElement("div"); card.className = "card"; card.tabIndex = 0;
       card.setAttribute("aria-label", "Note from " + (n.from === "jenny" ? "Jenny" : "Brian") + ". Swipe left or press Delete to remove.");
-      card.style.backgroundImage = `url("${texUrl(texOf(n))}")`;
-      if ((TEXTURES.find(t => t.id === texOf(n))||{}).dark) card.classList.add("dark");
       const d = document.createElement("span"); d.className = "date";
       d.textContent = (n.from === "jenny" ? "Jenny" : "Brian") + " \u00b7 " + fullDate(n.at);
       const t = document.createElement("p"); t.className = "txt hand-" + n.from; t.textContent = n.text;
@@ -364,6 +436,7 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
   function backToPencils(){
     if (!me) return;
     me = null; started = false;
+    updateBadges();
     mine.blur();
     clearTimeout(pickTimer);
     const page = $("page");
@@ -404,7 +477,7 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
     if (e.key === "j" || e.key === "J") $("pickJenny").click();
     if (e.key === "b" || e.key === "B") $("pickHim").click();
   });
-  $("page").addEventListener("click", e => { if (e.target === $("page")) mine.focus(); });
+  $("page").addEventListener("click", e => { if (e.target === $("page") || e.target === $("paper")) mine.focus(); });
 
   // ---- Firebase: passcode sign-in + shared notes
   let locked = false, started_store = false;
@@ -424,7 +497,7 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
         add(obj){ return addDoc(fsCollection(fs, name), obj); }
       };
     },
-    doc(path){ const [c, id] = path.split("/"); return { delete(){ return deleteDoc(fsDoc(fs, c, id)); } }; }
+    doc(path){ const [c, id] = path.split("/"); return { delete(){ return deleteDoc(fsDoc(fs, c, id)); }, update(o){ return updateDoc(fsDoc(fs, c, id), o); } }; }
   };
   function showLock(){
     document.body.classList.remove("checking");
