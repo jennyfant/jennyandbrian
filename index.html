@@ -30,8 +30,8 @@
   #bg::after{content:""; position:absolute; inset:0; background:radial-gradient(ellipse 90% 70% at 45% 40%, var(--veil,rgba(250,247,240,.45)), transparent 80%)}
 
   /* pencils */
-  body.checking #pick, body.checking #padBtn, body.locked #pick, body.locked #padBtn{opacity:0; pointer-events:none}
-  #pick, #padBtn{transition:opacity .5s ease}
+  body.checking #pick, body.locked #pick{opacity:0; pointer-events:none}
+  #pick{transition:opacity .5s ease}
   #lock{position:fixed; inset:0; z-index:30; display:flex; align-items:center; justify-content:center; padding-inline:16px}
   #code{background:transparent; border:0; outline:none; text-align:center; width:min(80vw,320px); padding:12px 0;
     font:500 34px/1 ui-sans-serif, system-ui, -apple-system, sans-serif; letter-spacing:.45em; color:var(--ink); caret-color:var(--ink)}
@@ -65,6 +65,10 @@
   #padBtn.has-new svg rect{fill:#fdfcf8}
   #padBtn.has-new{opacity:.95}
   .pencil:focus-visible{outline:2px solid var(--ink-soft); outline-offset:4px}
+  #pick.nudge .pencil.mech{animation:nudgeL .5s ease}
+  #pick.nudge .pencil.golf{animation:nudgeR .5s ease}
+  @keyframes nudgeL{30%{transform:rotate(-12deg) translateY(-12px)}}
+  @keyframes nudgeR{30%{transform:rotate(16deg) translateY(calc(6% - 12px))}}
   #pick.going .pencil{opacity:0; pointer-events:none}
   #pick.going .pencil.chosen.mech{transform:rotate(-40deg) translate(-40px,-60vh)}
   #pick.going .pencil.chosen.golf{transform:rotate(40deg) translate(40px,-60vh)}
@@ -109,11 +113,14 @@
   @keyframes draw{to{stroke-dashoffset:0}}
   @keyframes inkIn{from{opacity:0; transform:translateX(-4px)}to{opacity:.85; transform:none}}
   @media (prefers-reduced-motion: reduce){ #sentMark path{stroke-dashoffset:0} #sentMark span{opacity:.85} }
-  #padBtn{position:fixed; right:calc(12px + env(safe-area-inset-right,0px)); top:50%; transform:translateY(-50%); z-index:20;
-    background:transparent; border:0; padding:10px; color:var(--ink); opacity:.5; cursor:pointer; line-height:0; transition:opacity .2s ease, transform .2s ease}
-  #padBtn:hover, #padBtn:focus-visible{opacity:.9}
-  #padBtn[aria-expanded="true"]{opacity:.9}
-  #padBtn:focus-visible{outline:2px solid var(--ink-soft); outline-offset:2px; border-radius:8px}
+  #sideNav{position:fixed; right:calc(10px + env(safe-area-inset-right,0px)); top:50%; transform:translateY(-50%); z-index:20;
+    display:flex; flex-direction:column; align-items:center; gap:6px; transition:opacity .5s ease}
+  #sideNav button{position:relative; background:transparent; border:0; padding:10px; color:var(--ink); opacity:.45; cursor:pointer; line-height:0; transition:opacity .2s ease}
+  #sideNav button:hover, #sideNav button:focus-visible{opacity:.85}
+  #sideNav button[aria-current="true"]{opacity:.95}
+  #sideNav button[aria-current="true"]::after{content:""; position:absolute; left:50%; bottom:2px; width:4px; height:4px; margin-left:-2px; border-radius:50%; background:currentColor}
+  #sideNav button:focus-visible{outline:2px solid var(--ink-soft); outline-offset:2px; border-radius:8px}
+  body.checking #sideNav, body.locked #sideNav{opacity:0; pointer-events:none}
   #archive{position:fixed; inset:0; z-index:15; overflow-y:auto; -webkit-overflow-scrolling:touch;
     background:var(--bg) var(--tex) center/cover no-repeat; opacity:0; transition:opacity .35s ease}
   #archive.on{opacity:1}
@@ -162,7 +169,10 @@
  </div>
 </main>
 
-<button id="padBtn" type="button" aria-label="All notes" title="All notes"><svg viewBox="0 0 24 30" width="22" height="28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="24" rx="2"/><path d="M2.5 7.5h19"/><path d="M6.5 1.8v3.4M10.2 1.8v3.4M13.8 1.8v3.4M17.5 1.8v3.4"/><path d="M6 12.5h12M6 16.5h12M6 20.5h8"/></svg></button>
+<nav id="sideNav" aria-label="notepad">
+  <button id="padBtn" type="button" aria-label="All notes" title="All notes"><svg viewBox="0 0 24 30" width="22" height="28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="24" rx="2"/><path d="M2.5 7.5h19"/><path d="M6.5 1.8v3.4M10.2 1.8v3.4M13.8 1.8v3.4M17.5 1.8v3.4"/><path d="M6 12.5h12M6 16.5h12M6 20.5h8"/></svg></button>
+  <button id="penBtn" type="button" aria-label="Write a note" title="Write a note"><svg viewBox="0 0 24 30" width="22" height="28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3.5 20.5 7.5 9 19 4 20.5 5.5 15.5Z"/><path d="M14 6 18 10"/><path d="M5.5 15.5 9 19"/><path d="M4 26.5c3-1.6 5 .8 8-.6s4.4-1.4 7-.4"/></svg></button>
+</nav>
 
 <section id="archive" hidden aria-label="All notes">
   <ol id="archList"></ol>
@@ -318,6 +328,8 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
   function pick(who, btn){
     if (me) return;
     me = who;
+    store.set("np.last", who);
+    setTimeout(navState, 0);
     mine.className = "hand-" + who;
     mine.value = store.get("np.draft." + who) || "";
     $("page").hidden = false;
@@ -351,9 +363,6 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
       li.textContent = dbState === "pending" ? "Opening your notes\u2026" : "No notes yet.";
       list.append(li); return;
     }
-    const hint = document.createElement("li"); hint.className = "hint";
-    hint.textContent = matchMedia("(hover: none)").matches ? "\u2193 pull down to go back" : "press esc to go back";
-    list.append(hint);
     for (const n of all){
       const li = document.createElement("li"); li.className = "item";
       const card = document.createElement("div"); card.className = "card"; card.tabIndex = 0;
@@ -422,6 +431,7 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
   }
   function openArchive(){
     archOpen = true; renderArchive();
+    setTimeout(navState, 0);
     const a = $("archive"); a.hidden = false; a.scrollTop = 0;
     requestAnimationFrame(() => a.classList.add("on"));
     $("padBtn").setAttribute("aria-expanded","true");
@@ -430,18 +440,33 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
   function closeArchive(){
     if (!archOpen) return;
     archOpen = false;
+    setTimeout(navState, 0);
     const a = $("archive"); a.classList.remove("on");
     $("padBtn").setAttribute("aria-expanded","false");
     setTimeout(() => { if (!archOpen) a.hidden = true; }, 360);
     if (me) mine.focus({preventScroll:true});
   }
-  $("padBtn").onclick = () => archOpen ? closeArchive() : openArchive();
+  function navState(){
+    $("padBtn").setAttribute("aria-current", archOpen ? "true" : "false");
+    $("penBtn").setAttribute("aria-current", (!archOpen && me) ? "true" : "false");
+  }
+  $("padBtn").onclick = () => { archOpen ? closeArchive() : openArchive(); navState(); };
+  $("penBtn").onclick = () => {
+    if (archOpen) closeArchive();
+    if (me){ mine.focus({preventScroll:true}); navState(); return; }
+    const last = store.get("np.last");
+    if (last === "jenny") $("pickJenny").click();
+    else if (last === "him") $("pickHim").click();
+    else { const pk = $("pick"); pk.classList.remove("nudge"); void pk.offsetWidth; pk.classList.add("nudge"); }
+    navState();
+  };
   $("padBtn").setAttribute("aria-expanded","false");
 
   // ---- escape hatch: back to the pencils
   function backToPencils(){
     if (!me) return;
     me = null; started = false;
+    setTimeout(navState, 0);
     updateBadges();
     mine.blur();
     clearTimeout(pickTimer);
