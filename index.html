@@ -49,15 +49,21 @@
     .pencil.golf:hover{transform:rotate(16deg) translateY(calc(6% - 10px))}
   }
   .pencil{position:relative}
-  .pencil .dot{position:absolute; left:50%; width:13px; height:13px; margin-left:-6.5px; border-radius:50%;
-    background:#E4674A; box-shadow:0 0 0 3px rgba(253,252,248,.7); opacity:0; transform:scale(.4); transition:opacity .3s ease, transform .3s ease}
-  .pencil.mech .dot{top:0}
-  .pencil.golf .dot{top:27%}
-  .pencil.has-new .dot{opacity:1; transform:scale(1); animation:beat 2.4s ease-in-out infinite}
-  @keyframes beat{0%,100%{box-shadow:0 0 0 3px rgba(253,252,248,.7), 0 0 0 0 rgba(228,103,74,.45)}50%{box-shadow:0 0 0 3px rgba(253,252,248,.7), 0 0 0 9px rgba(228,103,74,0)}}
-  #padBtn{position:fixed}
-  #padBtn .pdot{position:absolute; top:6px; right:6px; width:9px; height:9px; border-radius:50%; background:#E4674A; opacity:0; transition:opacity .3s ease}
-  #padBtn.has-new .pdot{opacity:1}
+  .pencil{isolation:isolate}
+  .pencil .dot{position:absolute; z-index:-1; left:50%; bottom:18%; width:92px; height:118px; margin-left:-46px;
+    background:#fdfcf8; border-radius:1px 1px 2px 2px;
+    box-shadow:0 1px 1px rgba(40,30,20,.1), 0 8px 14px -6px rgba(40,30,20,.45);
+    background-image:linear-gradient(transparent 26px, rgba(42,36,24,.2) 26px, rgba(42,36,24,.2) 27.5px, transparent 27.5px, transparent 40px, rgba(42,36,24,.16) 40px, rgba(42,36,24,.16) 41.5px, transparent 41.5px, transparent 54px, rgba(42,36,24,.12) 54px, rgba(42,36,24,.12) 55.5px, transparent 55.5px);
+    background-size:58px 100%; background-repeat:no-repeat; background-position:16px 0;
+    opacity:0; transform:translate(10px,14px) rotate(14deg); transition:opacity .4s ease, transform .5s cubic-bezier(.2,.8,.2,1)}
+  .pencil .dot::before{content:""; position:absolute; left:0; right:0; top:-2px; height:5px;
+    background:radial-gradient(circle at 3px 0, transparent 2px, #fdfcf8 2.5px) 0 0/6px 5px repeat-x}
+  .pencil.golf .dot{bottom:14%}
+  .pencil.has-new .dot{opacity:1; transform:translate(0,0) rotate(-10deg)}
+  .pencil.golf.has-new .dot{transform:translate(0,0) rotate(9deg)}
+  #padBtn svg rect{transition:fill .3s ease}
+  #padBtn.has-new svg rect{fill:#fdfcf8}
+  #padBtn.has-new{opacity:.95}
   .pencil:focus-visible{outline:2px solid var(--ink-soft); outline-offset:4px}
   #pick.going .pencil{opacity:0; pointer-events:none}
   #pick.going .pencil.chosen.mech{transform:rotate(-40deg) translate(-40px,-60vh)}
@@ -156,7 +162,7 @@
  </div>
 </main>
 
-<button id="padBtn" type="button" aria-label="All notes" title="All notes"><span class="pdot" aria-hidden="true"></span><svg viewBox="0 0 24 30" width="22" height="28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="24" rx="2"/><path d="M2.5 7.5h19"/><path d="M6.5 1.8v3.4M10.2 1.8v3.4M13.8 1.8v3.4M17.5 1.8v3.4"/><path d="M6 12.5h12M6 16.5h12M6 20.5h8"/></svg></button>
+<button id="padBtn" type="button" aria-label="All notes" title="All notes"><svg viewBox="0 0 24 30" width="22" height="28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="24" rx="2"/><path d="M2.5 7.5h19"/><path d="M6.5 1.8v3.4M10.2 1.8v3.4M13.8 1.8v3.4M17.5 1.8v3.4"/><path d="M6 12.5h12M6 16.5h12M6 20.5h8"/></svg></button>
 
 <section id="archive" hidden aria-label="All notes">
   <ol id="archList"></ol>
