@@ -86,6 +86,9 @@
     box-shadow:0 1px 1px rgba(40,30,20,.08), 0 14px 28px -10px rgba(40,30,20,.45), 0 2px 6px rgba(40,30,20,.12);
     transform:rotate(-.8deg);
     --ink:#2A2418; --ink-soft:rgba(42,36,24,.5)}
+  .paper .their:not([hidden]) + .mineWrap{border-top:1px dashed rgba(42,36,24,.2); padding-top:18px}
+  .paper textarea::placeholder{color:rgba(42,36,24,.38); opacity:1}
+  .paper{cursor:text}
   .paper::before{content:""; position:absolute; left:0; right:0; top:-3px; height:7px;
     background:radial-gradient(circle at 5px 0, transparent 3px, #fdfcf8 3.5px) 0 0/10px 7px repeat-x}
   .paper .hand-jenny{font-size:clamp(18px,4.6vw,23px); line-height:1.4}
@@ -258,10 +261,16 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
     $("padBtn").classList.toggle("has-new", !!me && unreadFor(me));
   }
   const marking = new Set();
+  function setPrompt(hasTheirs){
+    if (!me) return;
+    const who = me === "jenny" ? "Brian" : "Jenny";
+    mine.placeholder = hasTheirs ? "write back to " + who + "\u2026" : "write to " + who + "\u2026";
+  }
   function renderTheirs(){
     updateBadges();
     if (!me) return;
     const n = theirLatest(), el = $("their");
+    setPrompt(!!n);
     if (!n){ el.hidden = true; return; }
     el.className = "their hand-" + n.from;
     el.textContent = n.text;
@@ -505,7 +514,7 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
     if (e.key === "j" || e.key === "J") $("pickJenny").click();
     if (e.key === "b" || e.key === "B") $("pickHim").click();
   });
-  $("page").addEventListener("click", e => { if (e.target === $("page") || e.target === $("paper")) mine.focus(); });
+  $("page").addEventListener("click", e => { if (!e.target.closest("textarea")) mine.focus(); });
 
   // ---- Firebase: passcode sign-in + shared notes
   let locked = false, started_store = false;
