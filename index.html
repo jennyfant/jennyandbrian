@@ -258,7 +258,8 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
     $("pickHim").classList.toggle("has-new", unreadFor("him"));
     $("pickJenny").setAttribute("aria-label", "Write as Jenny" + (unreadFor("jenny") ? " (new note from Brian)" : ""));
     $("pickHim").setAttribute("aria-label", "Write as Brian" + (unreadFor("him") ? " (new note from Jenny)" : ""));
-    $("padBtn").classList.toggle("has-new", !!me && unreadFor(me));
+    const who = me || store.get("np.last");
+    $("padBtn").classList.toggle("has-new", !!who && unreadFor(who));
   }
   const marking = new Set();
   function setPrompt(hasTheirs){
@@ -266,18 +267,17 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
     const who = me === "jenny" ? "Brian" : "Jenny";
     mine.placeholder = hasTheirs ? "write back to " + who + "\u2026" : "write to " + who + "\u2026";
   }
+  // The writing sheet is always blank; received notes live only in the notes list.
   function renderTheirs(){
     updateBadges();
-    if (!me) return;
-    const n = theirLatest(), el = $("their");
-    setPrompt(!!n);
-    if (!n){ el.hidden = true; return; }
-    el.className = "their hand-" + n.from;
-    el.textContent = n.text;
-    const w = document.createElement("span"); w.className = "when"; w.textContent = when(n.updatedAt || n.at);
-    el.append(w);
-    el.hidden = false;
-    if (dbState === "on" && n.id && !n.readAt && !marking.has(n.id)){
+    $("their").hidden = true;
+    setPrompt(false);
+  }
+  // Opening the notes list marks the latest note to you as read
+  function markReadFor(who){
+    if (!who || dbState !== "on") return;
+    const n = latestFrom(other(who));
+    if (n && n.id && !n.readAt && !marking.has(n.id)){
       marking.add(n.id);
       db.doc("notes/" + n.id).update({ readAt: Date.now() }).catch(() => marking.delete(n.id));
     }
@@ -329,7 +329,6 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
   });
   mine.addEventListener("input", () => {
     started = true; grow();
-    if (me) store.set("np.draft." + me, mine.value);
   });
 
   // ---- pick a pencil
@@ -340,7 +339,8 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
     store.set("np.last", who);
     setTimeout(navState, 0);
     mine.className = "hand-" + who;
-    mine.value = store.get("np.draft." + who) || "";
+    mine.value = ""; mine.classList.remove("sent","sending","nope");
+    setPrompt(false);
     $("page").hidden = false;
     mine.focus({preventScroll:true});           // inside the tap, so phones open the keyboard
     btn.classList.add("chosen");
@@ -440,6 +440,7 @@ const NOTEPAD_EMAIL = "jenny@jennyandbrian.com";
   }
   function openArchive(){
     archOpen = true; renderArchive();
+    markReadFor(me || store.get("np.last"));
     setTimeout(navState, 0);
     const a = $("archive"); a.hidden = false; a.scrollTop = 0;
     requestAnimationFrame(() => a.classList.add("on"));
