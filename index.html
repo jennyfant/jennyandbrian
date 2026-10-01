@@ -58,7 +58,7 @@
   const msg = document.getElementById("msg");
   const lines = {
     go: ["Redirecting…", "jennyhatesbrian.com is also not accepting visitors at this time."],
-    sorry: ["Apology submitted for review.", "Review status: pending. The site owner will be the judge of that."]
+    sorry: ["Verbal apologies are not accepted at this time.", "Redirecting to accepted forms of apology\u2026"]
   };
   function say(key, btn){
     btn.classList.remove("shake"); void btn.offsetWidth; btn.classList.add("shake");
@@ -66,7 +66,10 @@
     clearTimeout(say.t); say.t = setTimeout(() => { msg.textContent = lines[key][1]; }, 1200);
   }
   document.getElementById("go").onclick = e => say("go", e.currentTarget);
-  document.getElementById("sorry").onclick = e => say("sorry", e.currentTarget);
+  document.getElementById("sorry").onclick = e => {
+    say("sorry", e.currentTarget);
+    setTimeout(() => { location.href = "wishlist.html"; }, 2200);
+  };
 </script>
 </body>
 </html>
